@@ -13,5 +13,6 @@ import java.sql.SQLException;
  * @author jaakko
  */
 public interface Database {
+    void init() throws SQLException;
     Connection getConnection() throws SQLException;
 }
