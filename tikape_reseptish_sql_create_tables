@@ -23,6 +23,20 @@ CREATE TABLE ReseptiRaakaAine (
 	FOREIGN KEY (resepti_id) REFERENCES Resepti(id),
 	FOREIGN KEY (raakaaine_id) REFERENCES RaakaAine(id)
 );
+
+
+CREATE TABLE Kategoria (
+	id integer PRIMARY KEY,
+	nimi varchar(50)
+);
+
+
+CREATE TABLE ReseptiKategoria (
+	kategoria_id integer,
+	resepti_id integer,
+	FOREIGN KEY (kategoria_id) REFERENCES Kategoria(id),
+	FOREIGN KEY (resepti_id) REFERENCES Resepti(id)
+);
 	
 
 
