@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Reseptit</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <h1>Reseptit</h1>
+
+        <ul>
+            <li th:each="resepti: ${reseptit}">
+                <span th:text="${resepti.nimi}">reseptin nimi</span> <a th:href="${'/reseptit/' + resepti.id}">linkki</a>
+            </li>
+        </ul>
+
+        <p><a href="/haku">Haku</a></p>
+        <p><a href="/uusi">Luo uusi resepti</a></p>
+        <p><a href="/tilasto">Tilasto</a></p>
+        <p><a href="/">Etusivu</a></p>
+    </body>
+</html>
