@@ -1,0 +1,28 @@
+CREATE TABLE Resepti (
+	id integer PRIMARY KEY,
+	nimi varchar(50),
+	ohje varchar(3000),
+	tekija varchar(200),
+	valmistusaika integer
+);
+
+
+CREATE TABLE RaakaAine (
+	id integer PRIMARY KEY,
+	nimi varchar(50)
+);
+
+
+CREATE TABLE ReseptiRaakaAine (
+	resepti_id integer,
+	raakaaine_id integer,
+	maara integer,
+	yksikko varchar(20),
+        jarjestysluku integer,
+	valmistusohje varchar(100),
+	FOREIGN KEY (resepti_id) REFERENCES Resepti(id),
+	FOREIGN KEY (raakaaine_id) REFERENCES RaakaAine(id)
+);
+	
+
+
