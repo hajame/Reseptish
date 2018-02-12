@@ -8,20 +8,12 @@ package reseptish.pojo;
 import java.util.Objects;
 
 public class Raakaaine {
-    private Integer id;
+    private Integer raakaaineId;
     private String nimi;
 
-    public Raakaaine(Integer id, String nimi) {
-        this.id = id;
+    public Raakaaine(Integer raakaaineId, String nimi) {
+        this.raakaaineId = raakaaineId;
         this.nimi = nimi;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNimi() {
@@ -32,11 +24,19 @@ public class Raakaaine {
         this.nimi = nimi;
     }
 
+    public Integer getRaakaaineId() {
+        return raakaaineId;
+    }
+
+    public void setRaakaaineId(Integer raakaaineId) {
+        this.raakaaineId = raakaaineId;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.id);
-        hash = 47 * hash + Objects.hashCode(this.nimi);
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.raakaaineId);
+        hash = 67 * hash + Objects.hashCode(this.nimi);
         return hash;
     }
 
@@ -55,9 +55,11 @@ public class Raakaaine {
         if (!Objects.equals(this.nimi, other.nimi)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.raakaaineId, other.raakaaineId)) {
             return false;
         }
         return true;
     }
+
+    
 }

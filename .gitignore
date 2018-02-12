@@ -1,1 +1,6 @@
 */target/**
+<<<<<<< HEAD
+/target/
+=======
+.DS_Store
+>>>>>>> cb8c2f5912204fd0ce9b84f61e1d6336c6144d98
