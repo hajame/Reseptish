@@ -1,0 +1,3 @@
+https://www.w3schools.com/html/html_tables.asp
+https://stackoverflow.com/questions/24614113/create-a-table-in-thymeleaf
+https://stackoverflow.com/questions/3331111/remove-column-dividers-in-a-html-table
