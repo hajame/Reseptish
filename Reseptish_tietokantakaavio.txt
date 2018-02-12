@@ -1,0 +1,8 @@
+Tietokantakaavio (Reseptish):
+
+[Resepti|(pk) id:integer; nimi:string; ohje:string; tekija:string; valmistusAika:integer], 
+[RaakaAine|(pk) id:integer; nimi:string], 
+[ReseptiRaakaAine|(fk) resepti_id:integer; (fk) raakaAine_id:integer; jarjestysluku:integer; maara:integer; yksikko:string; valmistusohje:string],
+
+[Resepti]1-*[ReseptiRaakaAine],
+[RaakaAine]1-*[ReseptiRaakaAine]
