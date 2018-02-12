@@ -8,28 +8,28 @@ package reseptish.pojo;
 import java.util.Objects;
 
 public class Resepti {
-    private Integer id;
+    private Integer reseptiId;
     private String nimi;
     private String ohje;
     private String tekija;
     private Integer valmistusaika; //minuutteja
 
-    public Resepti(Integer id, String nimi, String ohje, String tekija, Integer valmistusaika) {
-        this.id = id;
+    public Resepti(Integer reseptiId, String nimi, String ohje, String tekija, Integer valmistusaika) {
+        this.reseptiId = reseptiId;
         this.nimi = nimi;
         this.ohje = ohje;
         this.tekija = tekija;
         this.valmistusaika = valmistusaika;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getReseptiId() {
+        return reseptiId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setReseptiId(Integer reseptiId) {
+        this.reseptiId = reseptiId;
     }
-
+    
     public String getNimi() {
         return nimi;
     }
@@ -64,12 +64,12 @@ public class Resepti {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.nimi);
-        hash = 89 * hash + Objects.hashCode(this.ohje);
-        hash = 89 * hash + Objects.hashCode(this.tekija);
-        hash = 89 * hash + Objects.hashCode(this.valmistusaika);
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.reseptiId);
+        hash = 29 * hash + Objects.hashCode(this.nimi);
+        hash = 29 * hash + Objects.hashCode(this.ohje);
+        hash = 29 * hash + Objects.hashCode(this.tekija);
+        hash = 29 * hash + Objects.hashCode(this.valmistusaika);
         return hash;
     }
 
@@ -94,7 +94,7 @@ public class Resepti {
         if (!Objects.equals(this.tekija, other.tekija)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.reseptiId, other.reseptiId)) {
             return false;
         }
         if (!Objects.equals(this.valmistusaika, other.valmistusaika)) {
@@ -102,6 +102,6 @@ public class Resepti {
         }
         return true;
     }
-    
+
     
 }
