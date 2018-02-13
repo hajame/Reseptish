@@ -12,6 +12,7 @@ import java.util.Objects;
  * @author jaakko
  */
 public class ReseptiRaakaaine {
+
     private Resepti reseptiId;
     private Raakaaine raakaaineId;
     private Integer maara;
@@ -120,6 +121,5 @@ public class ReseptiRaakaaine {
         }
         return true;
     }
-    
-    
+
 }
