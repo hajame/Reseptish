@@ -4,6 +4,11 @@
   <head>
     <title>Reseptish - luo uusi resepti</title>
     <meta charset="utf-8" />
+    <style>
+      input.maara {
+        width:70px;
+      }
+    </style>
   </head>
 
   <body>
@@ -13,12 +18,21 @@
       <label for="nimi">nimi: </label>
       <input name="nimi" type="text" name="nimi" size="20" />
       <br/>
+      <label for="tekijä">tekijä: </label>
+      <input type="text" name="tekija" size="20" />
+      <br/>      
+      <label for="valmistusaika">valmistusaika (min): </label>
+      <input class="maara" type="number" name="valmistusaika" size="20" />
+      <br/>
+      <label for="kategoria">kategoria: </label>
+      <input name="kategoria" type="text" size="20" />
+      <br/>
 
       <div class="rivi" id="1">
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine1" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara1" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara1" style="width:70px;" maxlength="12" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko1" size="6" maxlength="20" />
         <br/>
@@ -28,7 +42,7 @@
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine2" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara2" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara2" maxlength="50" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko2" size="6" maxlength="20" />
         <br/>
@@ -37,7 +51,7 @@
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine3" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara3" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara3" maxlength="50" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko3" size="6" maxlength="20" />
         <br/>
@@ -46,7 +60,7 @@
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine4" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara4" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara4" maxlength="50" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko4" size="6" maxlength="20" />
         <br/>
@@ -55,7 +69,7 @@
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine5" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara5" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara5" maxlength="50" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko5" size="6" maxlength="20" />
         <br/>
@@ -64,7 +78,7 @@
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine6" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara6" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara6" maxlength="50" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko6" size="6" maxlength="20" />
         <br/>
@@ -73,7 +87,7 @@
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine7" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara7" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara7" maxlength="50" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko7" size="6" maxlength="20" />
         <br/>
@@ -82,7 +96,7 @@
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine8" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara8" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara8" maxlength="50" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko8" size="6" maxlength="20" />
         <br/>
@@ -91,7 +105,7 @@
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine9" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara9" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara9" maxlength="50" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko9" size="6" maxlength="20" />
         <br/>
@@ -100,7 +114,7 @@
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine10" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara10" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara10" maxlength="50" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko10" size="6" maxlength="20" />
         <br/>
@@ -109,7 +123,7 @@
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine11" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara11" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara11" maxlength="50" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko11" size="6" maxlength="20" />
         <br/>
@@ -118,7 +132,7 @@
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine12" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara12" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara12" maxlength="50" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko12" size="6" maxlength="20" />
         <br/>
@@ -127,7 +141,7 @@
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine13" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara13" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara13" maxlength="50" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko13" size="6" maxlength="20" />
         <br/>
@@ -136,7 +150,7 @@
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine14" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara14" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara14" maxlength="50" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko14" size="6" maxlength="20" />
         <br/>
@@ -145,7 +159,7 @@
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine15" size="14" maxlength="50" />
         <label>määrä: </label>
-        <input type="text" name="maara15" size="1" maxlength="50" />
+        <input class="maara" type="number" name="maara15" maxlength="50" />
         <label>yksikkö: </label>
         <input type="text" name="yksikko15" size="6" maxlength="20" />
         <br/>
