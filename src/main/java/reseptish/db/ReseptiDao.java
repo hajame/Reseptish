@@ -67,5 +67,21 @@ public class ReseptiDao {
         }
     }
     
+    public int count() throws SQLException {
+         try (Connection c = db.getConnection()) {
+            PreparedStatement ps = c.prepareStatement("SELECT COUNT() FROM Resepti");
+            
+            ResultSet rs = ps.executeQuery();
+            
+            
+            if (rs.next()) {
+                return rs.getInt("COUNT()");
+            } else {
+                return 0;
+            }           
+        }
+  
+    }
+    
     //TODO: delete
 }
