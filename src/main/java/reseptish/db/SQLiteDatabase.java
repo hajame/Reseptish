@@ -22,7 +22,7 @@ public class SQLiteDatabase implements Database {
     }
     
     public SQLiteDatabase() {
-        this.path = ":memory:";
+        this.path = "sqlite:memory:";
     }
     
     @Override
