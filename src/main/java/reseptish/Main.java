@@ -2,6 +2,7 @@ package reseptish;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 import reseptish.db.Database;
 import reseptish.db.SQLiteDatabase;
 import spark.ModelAndView;
@@ -27,7 +28,13 @@ public class Main {
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 
-        Spark.get("/opiskelijat", (req, res) -> {
+        Spark.get("/resepti/:id", (req, res) -> {
+            Map map = new HashMap<>();
+            
+            return new ModelAndView(map, "resepti");
+        }, new ThymeleafTemplateEngine());
+        
+        /*Spark.get("/opiskelijat", (req, res) -> {
             HashMap map = new HashMap<>();
 //            map.put("opiskelijat", opiskelijaDao.findAll());
 
@@ -39,6 +46,6 @@ public class Main {
 //            map.put("opiskelija", opiskelijaDao.findOne(Integer.parseInt(req.params("id"))));
 
             return new ModelAndView(map, "opiskelija");
-        }, new ThymeleafTemplateEngine());
+        }, new ThymeleafTemplateEngine());*/
     }
 }
