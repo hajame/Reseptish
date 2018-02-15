@@ -29,7 +29,7 @@ public class RaakaaineDao {
         try (Connection c = db.getConnection()) {
             List<Raakaaine> raakaaineet = new ArrayList<>();
             
-            ResultSet rs = c.prepareStatement("SELECT * FROM Raakaaine").executeQuery();
+            ResultSet rs = c.prepareStatement("SELECT * FROM RaakaAine").executeQuery();
             while (rs.next()) {
                 raakaaineet.add(Raakaaine.rowToRaakaaine(rs));
             }
@@ -40,7 +40,7 @@ public class RaakaaineDao {
     
     public Raakaaine findOne(int id) throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM Raakaaine WHERE raakaaineId = ?");
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM RaakaAine WHERE raakaaine_id = ?");
             ps.setInt(1, id);
             
             ResultSet rs = ps.executeQuery();

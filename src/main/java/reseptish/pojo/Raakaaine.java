@@ -64,6 +64,6 @@ public class Raakaaine {
     }
     
     public static Raakaaine rowToRaakaaine(ResultSet rs) throws SQLException {
-        return new Raakaaine(rs.getInt("Raakaaine.raakaaineId"), rs.getString("Raakaaine.nimi"));
+        return new Raakaaine(rs.getInt("RaakaAine.raakaaineId"), rs.getString("RaakaAine.nimi"));
     }
 }

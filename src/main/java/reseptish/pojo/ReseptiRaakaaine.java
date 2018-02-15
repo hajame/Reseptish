@@ -124,6 +124,6 @@ public class ReseptiRaakaaine {
     }
 
     public static ReseptiRaakaaine rowToReseptiRaakaaine(ResultSet rs) throws SQLException {
-        return new ReseptiRaakaaine(Resepti.rowToResepti(rs), Raakaaine.rowToRaakaaine(rs), rs.getInt("ReseptiRaakaaine.maara"), rs.getString("ReseptiRaakaaine.yksikko"), rs.getInt("ReseptiRaakaaine.jarjestysluku"), rs.getString("ReseptiRaakaaine.valmistusohje"));
+        return new ReseptiRaakaaine(Resepti.rowToResepti(rs), Raakaaine.rowToRaakaaine(rs), rs.getInt("ReseptiRaakaAine.maara"), rs.getString("ReseptiRaakaAine.yksikko"), rs.getInt("ReseptiRaakaAine.jarjestysluku"), rs.getString("ReseptiRaakaAine.valmistusohje"));
     }
 }

@@ -39,7 +39,7 @@ public class ReseptiDao {
     
     public Resepti findOne(int id) throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM Resepti WHERE reseptiId = ?");
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM Resepti WHERE resepti_id = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             
