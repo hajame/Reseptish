@@ -23,10 +23,6 @@ public class Main {
         Database db = new SQLiteDatabase(new File("reseptish.db"));
         db.init();
         
-        ReseptiRaakaaineDao dao = new ReseptiRaakaaineDao(db);
-        for (ReseptiRaakaaine resepti : dao.findAll()) {
-            System.out.println(resepti.getYksikko());
-        }
         
         /*Spark.get("/", (req, res) -> {
             HashMap map = new HashMap<>();
