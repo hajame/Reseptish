@@ -8,6 +8,7 @@ package reseptish.db;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -29,13 +30,47 @@ public class SQLiteDatabase implements Database {
     public void init() throws SQLException {
         //TODO: SQL käskyt taulujen luomiseen
         try (Connection c = getConnection()) {
-            
+            for (String kasky : luoTaulut()) {
+                c.prepareStatement(kasky).execute();
+            }
         }
     }
 
     @Override
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:sqlite:"+path);
+    }
+    
+    private static String[] luoTaulut() {
+        return new String[] {
+            "CREATE TABLE IF NOT EXISTS Resepti (" +
+"	id integer PRIMARY KEY," +
+"	nimi varchar(50)," +
+"	ohje varchar(3000)," +
+"	tekija varchar(200)," +
+"	valmistusaika integer" +
+");", "CREATE TABLE IF NOT EXISTS RaakaAine (" +
+"	id integer PRIMARY KEY," +
+"	nimi varchar(50)" +
+");", "CREATE TABLE IF NOT EXISTS ReseptiRaakaAine (" +
+"	resepti_id integer," +
+"	raakaaine_id integer," +
+"	maara integer," +
+"	yksikko varchar(20)," +
+"        jarjestysluku integer," +
+"	valmistusohje varchar(100)," +
+"	FOREIGN KEY (resepti_id) REFERENCES Resepti(id)," +
+"	FOREIGN KEY (raakaaine_id) REFERENCES RaakaAine(id)" +
+");", "CREATE TABLE IF NOT EXISTS Kategoria (" +
+"	id integer PRIMARY KEY," +
+"	nimi varchar(50)" +
+");", "CREATE TABLE IF NOT EXISTS ReseptiKategoria (" +
+"	kategoria_id integer," +
+"	resepti_id integer," +
+"	FOREIGN KEY (kategoria_id) REFERENCES Kategoria(id)," +
+"	FOREIGN KEY (resepti_id) REFERENCES Resepti(id)" +
+");"
+        };
     }
     
 }
