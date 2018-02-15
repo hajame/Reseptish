@@ -21,9 +21,13 @@
         <h1>Reseptihakemisto</h1>
         <p></p>
 
-        <form action="/haku" method="POST" class="kentta">
+        <form action="/haku" method="POST" class="kentta" id="hakukentta">
             <span class="description">HAE</span>
             <input type="text" name="resepti"/>
+            <select name="hakutyyppi" form="hakukentta">
+                <option value="resepti">Resepti</option>
+                <option value="raakaAine">RaakaAine</option>
+            </select>
             <input type="submit"/>
         </form>
 
