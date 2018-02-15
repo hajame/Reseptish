@@ -38,4 +38,20 @@ public class ReseptiRaakaaineDao {
             return raakaaineet;
         }
     }
+    
+    public List<ReseptiRaakaaine> findAllForResepti(int id) throws SQLException {
+        try (Connection c = db.getConnection()) {
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM ReseptiRaakaAine, Resepti, RaakaAine WHERE ReseptiRaakaAine.resepti_id = Resepti.resepti_id AND Raakaaine.raakaaine_id = ReseptiRaakaaine.raakaaine_id AND Resepti.resepti_id = ?");
+            ps.setInt(1, id);
+            
+            List<ReseptiRaakaaine> raakaaineet = new ArrayList<>();
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                raakaaineet.add(ReseptiRaakaaine.rowToReseptiRaakaaine(rs));
+            }
+            
+            return raakaaineet;
+        }
+    }
 }
