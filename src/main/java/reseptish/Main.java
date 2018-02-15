@@ -1,10 +1,12 @@
 package reseptish;
 
+import java.io.File;
 import java.util.HashMap;
+import reseptish.db.Database;
+import reseptish.db.SQLiteDatabase;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
-import tikape.runko.database.Database;
 import tikape.runko.database.OpiskelijaDao;
 
 public class Main {
@@ -14,6 +16,9 @@ public class Main {
         if (System.getenv("PORT") != null) {
             Spark.port(Integer.valueOf(System.getenv("PORT")));
         }
+        
+        Database db = new SQLiteDatabase(new File("reseptish.db"));
+        db.init();
         
         Spark.get("/", (req, res) -> {
             HashMap map = new HashMap<>();
