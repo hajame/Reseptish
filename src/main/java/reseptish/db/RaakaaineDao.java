@@ -49,5 +49,18 @@ public class RaakaaineDao {
         }
     }
     
+    public Integer add(String nimi) throws SQLException {
+        try (Connection c = db.getConnection()) {
+            PreparedStatement lisaa = c.prepareStatement("INSERT INTO RaakaAine (nimi) VALUES (?)");
+            lisaa.setString(1, nimi);
+            lisaa.executeUpdate();
+            
+            ResultSet rs = lisaa.getGeneratedKeys();
+            
+            return rs.next() ? rs.getInt(1) : null;
+            
+        }
+    }
+    
     //TODO: delete
 }
