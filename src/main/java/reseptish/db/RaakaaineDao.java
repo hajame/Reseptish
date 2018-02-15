@@ -49,6 +49,7 @@ public class RaakaaineDao {
         }
     }
     
+    //Palauttaa lisätyn raaka-aineen ID:n tai null jos raaka-aine on jo tietokannassa
     public Integer add(String nimi) throws SQLException {
         try (Connection c = db.getConnection()) {
             PreparedStatement lisaa = c.prepareStatement("INSERT INTO RaakaAine (nimi) VALUES (?)");
