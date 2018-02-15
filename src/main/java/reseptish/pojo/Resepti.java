@@ -106,6 +106,6 @@ public class Resepti {
     }
     
     public static Resepti rowToResepti(ResultSet rs) throws SQLException {
-        return new Resepti(rs.getInt("Resepti.reseptiId"), rs.getString("Resepti.nimi"), rs.getString("Resepti.ohje"), rs.getString("Resepti.tekija"), rs.getInt("Resepti.valmistusaika"));
+        return new Resepti(rs.getInt("resepti_id"), rs.getString("resepti_nimi"), rs.getString("ohje"), rs.getString("tekija"), rs.getInt("valmistusaika"));
     }
 }

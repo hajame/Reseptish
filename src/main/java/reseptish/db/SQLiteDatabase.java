@@ -45,25 +45,25 @@ public class SQLiteDatabase implements Database {
         return new String[] {
             "CREATE TABLE IF NOT EXISTS Resepti (" +
 "	resepti_id integer PRIMARY KEY," +
-"	nimi varchar(50)," +
+"	resepti_nimi varchar(50)," +
 "	ohje varchar(3000)," +
 "	tekija varchar(200)," +
 "	valmistusaika integer" +
 ");", "CREATE TABLE IF NOT EXISTS RaakaAine (" +
 "	raakaaine_id integer PRIMARY KEY," +
-"	nimi varchar(50)" +
+"	raakaaine_nimi varchar(50)" +
 ");", "CREATE TABLE IF NOT EXISTS ReseptiRaakaAine (" +
 "	resepti_id integer," +
 "	raakaaine_id integer," +
 "	maara integer," +
 "	yksikko varchar(20)," +
-"        jarjestysluku integer," +
+"       jarjestysluku integer," +
 "	valmistusohje varchar(100)," +
 "	FOREIGN KEY (resepti_id) REFERENCES Resepti(id)," +
 "	FOREIGN KEY (raakaaine_id) REFERENCES RaakaAine(id)" +
 ");", "CREATE TABLE IF NOT EXISTS Kategoria (" +
 "	kategoria_id integer PRIMARY KEY," +
-"	nimi varchar(50)" +
+"	kategoria_nimi varchar(50)" +
 ");", "CREATE TABLE IF NOT EXISTS ReseptiKategoria (" +
 "	kategoria_id integer," +
 "	resepti_id integer," +

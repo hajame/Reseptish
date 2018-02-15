@@ -13,19 +13,35 @@ import java.util.Objects;
  */
 public class ReseptiKategoria {
 
-    private Resepti reseptiId;
-    private Kategoria kategoriaId;
+    private Resepti resepti;
+    private Kategoria kategoria;
 
-    public ReseptiKategoria(Resepti reseptiId, Kategoria kategoriaId) {
-        this.reseptiId = reseptiId;
-        this.kategoriaId = kategoriaId;
+    public ReseptiKategoria(Resepti resepti, Kategoria kategoria) {
+        this.resepti = resepti;
+        this.kategoria = kategoria;
+    }
+
+    public Resepti getResepti() {
+        return resepti;
+    }
+
+    public void setResepti(Resepti resepti) {
+        this.resepti = resepti;
+    }
+
+    public Kategoria getKategoria() {
+        return kategoria;
+    }
+
+    public void setKategoria(Kategoria kategoria) {
+        this.kategoria = kategoria;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.reseptiId);
-        hash = 89 * hash + Objects.hashCode(this.kategoriaId);
+        int hash = 5;
+        hash = 29 * hash + Objects.hashCode(this.resepti);
+        hash = 29 * hash + Objects.hashCode(this.kategoria);
         return hash;
     }
 
@@ -41,29 +57,15 @@ public class ReseptiKategoria {
             return false;
         }
         final ReseptiKategoria other = (ReseptiKategoria) obj;
-        if (!Objects.equals(this.reseptiId, other.reseptiId)) {
+        if (!Objects.equals(this.resepti, other.resepti)) {
             return false;
         }
-        if (!Objects.equals(this.kategoriaId, other.kategoriaId)) {
+        if (!Objects.equals(this.kategoria, other.kategoria)) {
             return false;
         }
         return true;
     }
-
-    public Resepti getReseptiId() {
-        return reseptiId;
-    }
-
-    public void setReseptiId(Resepti reseptiId) {
-        this.reseptiId = reseptiId;
-    }
-
-    public Kategoria getKategoriaId() {
-        return kategoriaId;
-    }
-
-    public void setKategoriaId(Kategoria kategoriaId) {
-        this.kategoriaId = kategoriaId;
-    }
+    
+    
 
 }

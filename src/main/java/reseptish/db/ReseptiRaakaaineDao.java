@@ -26,7 +26,7 @@ public class ReseptiRaakaaineDao {
     
     public List<ReseptiRaakaaine> findAll() throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM ReseptiRaakaine, Resepti, RaakaAine WHERE ReseptiRaakaine.resepti_id = Resepti.resepti_id AND Raakaaine.raakaaine_id = ReseptiRaakaaine.raakaaine_id");
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM ReseptiRaakaAine, Resepti, RaakaAine WHERE ReseptiRaakaAine.resepti_id = Resepti.resepti_id AND Raakaaine.raakaaine_id = ReseptiRaakaaine.raakaaine_id");
             
             List<ReseptiRaakaaine> raakaaineet = new ArrayList<>();
             

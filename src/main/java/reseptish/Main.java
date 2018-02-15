@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import reseptish.db.Database;
+import reseptish.db.ReseptiRaakaaineDao;
 import reseptish.db.SQLiteDatabase;
+import reseptish.pojo.ReseptiRaakaaine;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -21,7 +23,12 @@ public class Main {
         Database db = new SQLiteDatabase(new File("reseptish.db"));
         db.init();
         
-        Spark.get("/", (req, res) -> {
+        ReseptiRaakaaineDao dao = new ReseptiRaakaaineDao(db);
+        for (ReseptiRaakaaine resepti : dao.findAll()) {
+            System.out.println(resepti.getYksikko());
+        }
+        
+        /*Spark.get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("viesti", "tervehdys");
 
@@ -32,7 +39,7 @@ public class Main {
             Map map = new HashMap<>();
             
             return new ModelAndView(map, "resepti");
-        }, new ThymeleafTemplateEngine());
+        }, new ThymeleafTemplateEngine());*/
         
         /*Spark.get("/opiskelijat", (req, res) -> {
             HashMap map = new HashMap<>();
