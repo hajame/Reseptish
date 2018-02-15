@@ -30,7 +30,7 @@ public class ReseptiDao {
             
             ResultSet rs = c.prepareStatement("SELECT * FROM Resepti").executeQuery();
             while (rs.next()) {
-                reseptit.add(rowToResepti(rs));
+                reseptit.add(Resepti.rowToResepti(rs));
             }
             
             return reseptit;
@@ -44,7 +44,7 @@ public class ReseptiDao {
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                return rowToResepti(rs);
+                return Resepti.rowToResepti(rs);
             } else {
                 return null;
             }
@@ -52,8 +52,4 @@ public class ReseptiDao {
     }
     
     //TODO: delete
-    
-    private static Resepti rowToResepti(ResultSet rs) throws SQLException {
-        return new Resepti(rs.getInt("reseptiId"), rs.getString("nimi"), rs.getString("ohje"), rs.getString("tekija"), rs.getInt("valmistusaika"));
-    }
 }

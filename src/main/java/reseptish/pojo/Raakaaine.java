@@ -5,6 +5,8 @@
  */
 package reseptish.pojo;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class Raakaaine {
@@ -60,6 +62,8 @@ public class Raakaaine {
         }
         return true;
     }
-
     
+    public static Raakaaine rowToRaakaaine(ResultSet rs) throws SQLException {
+        return new Raakaaine(rs.getInt("Raakaaine.raakaaineId"), rs.getString("Raakaaine.nimi"));
+    }
 }

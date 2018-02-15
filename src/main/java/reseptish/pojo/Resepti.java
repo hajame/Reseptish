@@ -5,6 +5,8 @@
  */
 package reseptish.pojo;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class Resepti {
@@ -102,6 +104,8 @@ public class Resepti {
         }
         return true;
     }
-
     
+    public static Resepti rowToResepti(ResultSet rs) throws SQLException {
+        return new Resepti(rs.getInt("Resepti.reseptiId"), rs.getString("Resepti.nimi"), rs.getString("Resepti.ohje"), rs.getString("Resepti.tekija"), rs.getInt("Resepti.valmistusaika"));
+    }
 }

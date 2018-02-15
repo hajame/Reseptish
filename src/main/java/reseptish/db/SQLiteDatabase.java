@@ -44,13 +44,13 @@ public class SQLiteDatabase implements Database {
     private static String[] luoTaulut() {
         return new String[] {
             "CREATE TABLE IF NOT EXISTS Resepti (" +
-"	id integer PRIMARY KEY," +
+"	resepti_id integer PRIMARY KEY," +
 "	nimi varchar(50)," +
 "	ohje varchar(3000)," +
 "	tekija varchar(200)," +
 "	valmistusaika integer" +
 ");", "CREATE TABLE IF NOT EXISTS RaakaAine (" +
-"	id integer PRIMARY KEY," +
+"	raakaaine_id integer PRIMARY KEY," +
 "	nimi varchar(50)" +
 ");", "CREATE TABLE IF NOT EXISTS ReseptiRaakaAine (" +
 "	resepti_id integer," +
@@ -62,7 +62,7 @@ public class SQLiteDatabase implements Database {
 "	FOREIGN KEY (resepti_id) REFERENCES Resepti(id)," +
 "	FOREIGN KEY (raakaaine_id) REFERENCES RaakaAine(id)" +
 ");", "CREATE TABLE IF NOT EXISTS Kategoria (" +
-"	id integer PRIMARY KEY," +
+"	kategoria_id integer PRIMARY KEY," +
 "	nimi varchar(50)" +
 ");", "CREATE TABLE IF NOT EXISTS ReseptiKategoria (" +
 "	kategoria_id integer," +

@@ -31,7 +31,7 @@ public class RaakaaineDao {
             
             ResultSet rs = c.prepareStatement("SELECT * FROM Raakaaine").executeQuery();
             while (rs.next()) {
-                raakaaineet.add(rowToRaakaaine(rs));
+                raakaaineet.add(Raakaaine.rowToRaakaaine(rs));
             }
             
             return raakaaineet;
@@ -45,13 +45,9 @@ public class RaakaaineDao {
             
             ResultSet rs = ps.executeQuery();
                     
-            return rs.next() ? rowToRaakaaine(rs) : null;
+            return rs.next() ? Raakaaine.rowToRaakaaine(rs) : null;
         }
     }
     
     //TODO: delete
-    
-    private static Raakaaine rowToRaakaaine(ResultSet rs) throws SQLException {
-        return new Raakaaine(rs.getInt("raakaaineId"), rs.getString("nimi"));
-    }
 }
