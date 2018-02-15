@@ -1,20 +1,29 @@
 
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
     <head>
         <title>Reseptihakemisto</title>
-        <meta charset="UTF-8" />
+        <meta charset="UTF-8" /> <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans"/>
         <style>
             .kentta {
                 background-color: MediumSeaGreen;
                 color: white;
                 padding: 10px;
+                font-family: 'OpenSans', bold;
             }
 
-            .body {
-
+            body {
+                font-family: 'OpenSans', bold;
             }
+            
+            .f {
+                font-family: 'OpenSans', bold;
+            }
+            
         </style>
+        
     </head>
 
     <body>
@@ -23,10 +32,10 @@
 
         <form action="/haku" method="POST" class="kentta" id="hakukentta">
             <span class="description">HAE</span>
-            <input type="text" name="resepti"/>
+            <input class="f" type="text" name="resepti"/>
             <select name="hakutyyppi" form="hakukentta">
-                <option value="resepti">Resepti</option>
-                <option value="raakaAine">RaakaAine</option>
+                <option value="resepti" class="f">Resepti</option>
+                <option value="raakaAine"class="f">RaakaAine</option>
             </select>
             <input type="submit"/>
         </form>
