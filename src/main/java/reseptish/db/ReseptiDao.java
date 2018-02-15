@@ -51,5 +51,21 @@ public class ReseptiDao {
         }
     }
     
+    public List<Resepti> find(String query) throws SQLException {
+        try (Connection c = db.getConnection()) {
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM Resepti WHERE resepti_id LIKE ?");
+            ps.setString(1, "%"+query+"%");
+            
+            ResultSet rs = ps.executeQuery();
+            
+            List<Resepti> reseptit = new ArrayList<>();
+            while (rs.next()) {
+                reseptit.add(Resepti.rowToResepti(rs));
+            }
+            
+            return reseptit;
+        }
+    }
+    
     //TODO: delete
 }
