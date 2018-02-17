@@ -74,7 +74,7 @@ public class Main {
         Spark.post("/uusi", (req, res) -> {
 
             Resepti resepti = new Resepti(0, req.params("nimi"), req.params("ohje"),
-                    req.params("tekija"), Integer.parseInt(req.params("valmistusaika")));
+                    req.params("tekija"), req.attribute("valmistusaika"));
             kategoriaDao.add(req.params("kategoria"));
 
             //  palauttaa reseptin Id:n (ainakin teoriassa)
