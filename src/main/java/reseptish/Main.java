@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import reseptish.db.Database;
+import reseptish.db.KategoriaDao;
+import reseptish.db.RaakaaineDao;
 import reseptish.db.ReseptiDao;
 import reseptish.db.ReseptiRaakaaineDao;
 import reseptish.db.SQLiteDatabase;
@@ -23,14 +25,15 @@ public class Main {
         if (System.getenv("PORT") != null) {
             Spark.port(Integer.valueOf(System.getenv("PORT")));
         }
-        
+
         Database db = new SQLiteDatabase(new File("reseptish.db"));
         db.init();
-        
+
         ReseptiRaakaaineDao reseptiRaakaaineDao = new ReseptiRaakaaineDao(db);
         ReseptiDao reseptiDao = new ReseptiDao(db);
-        
-        
+        RaakaaineDao raakaaineDao = new RaakaaineDao(db);
+        KategoriaDao kategoriaDao = new KategoriaDao(db);
+
         //Etusivu
         Spark.get("/", (req, res) -> {
             return new ModelAndView(Collections.emptyMap(), "index");
@@ -39,43 +42,66 @@ public class Main {
         //Yksittäinen resepti
         Spark.get("/resepti/:id", (req, res) -> {
             Map map = new HashMap<>();
-            
+
             List<ReseptiRaakaaine> reseptiJaRaakaaineet = reseptiRaakaaineDao.findAllForResepti(Integer.parseInt(req.params("id")));
             Resepti resepti = reseptiJaRaakaaineet.get(0).getReseptiId();
 
             map.put("resepti", resepti);
             map.put("raakaaineet", reseptiJaRaakaaineet);
-            
+
             return new ModelAndView(map, "soloresepti");
         }, new ThymeleafTemplateEngine());
-        
+
         //Kaikki reseptit
         Spark.get("/reseptit", (req, res) -> {
             HashMap map = new HashMap<>();
-            
+
             map.put("resepti", reseptiDao.findAll());
 
             return new ModelAndView(map, "reseptit");
         }, new ThymeleafTemplateEngine());
-        
+
         //Haku
         Spark.get("/haku", (req, res) -> {
             return new ModelAndView(Collections.emptyMap(), "haku");
         }, new ThymeleafTemplateEngine());
-        
-        //Haku
+
+        //Uusi
         Spark.get("/uusi", (req, res) -> {
             return new ModelAndView(Collections.emptyMap(), "uusi");
         }, new ThymeleafTemplateEngine());
-        
+
+        Spark.post("/uusi", (req, res) -> {
+
+            Resepti resepti = new Resepti(0, req.params("nimi"), req.params("ohje"),
+                    req.params("tekija"), Integer.parseInt(req.params("valmistusaika")));
+            kategoriaDao.add(req.params("kategoria"));
+
+            //  palauttaa reseptin Id:n (ainakin teoriassa)
+            resepti.setReseptiId(reseptiDao.add(resepti));
+
+            for (int i = 1; i < 16; i++) {
+                String raakaaine = req.params("maara" + i);
+
+                if (!raakaaine.isEmpty()) {
+                    raakaaineDao.add(raakaaine);
+
+                    //  ei vielä valmis
+//                  reseptiRaakaaineDao.add(resepti.getReseptiId, raakaaine.getRaakaaineId);   
+                }
+            }
+
+            res.redirect("/resepti/" + resepti.getReseptiId());
+            return new ModelAndView(Collections.emptyMap(), "index");
+        }, new ThymeleafTemplateEngine());
+
         //Tilastot
         Spark.get("/tilasto", (req, res) -> {
             Map map = new HashMap<>();
-            
+
             map.put("maara", reseptiDao.count());
-            
+
             //TODO: tilastojen hakeminen tietokannasta
-            
             return new ModelAndView(map, "tilasto");
         }, new ThymeleafTemplateEngine());
 

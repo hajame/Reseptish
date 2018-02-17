@@ -53,7 +53,7 @@ public class ReseptiDao {
     
     public List<Resepti> find(String query) throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM Resepti WHERE resepti_id LIKE ?");
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM Resepti WHERE resepti_nimi LIKE ?");
             ps.setString(1, "%"+query+"%");
             
             ResultSet rs = ps.executeQuery();
@@ -82,6 +82,26 @@ public class ReseptiDao {
         }
   
     }
+    
+//Palauttaa lisätyn reseptin ID:n
+    public Integer add(Resepti resepti) throws SQLException {
+        try (Connection c = db.getConnection()) {
+            //Erilainen PostgreSQL:ssä
+            PreparedStatement lisaa = c.prepareStatement("INSERT INTO Resepti "
+                + "(nimi, ohje, tekija, valmistusaika) "
+                + "VALUES (" + resepti.getNimi() + ", "
+                + resepti.getOhje() + ", " + resepti.getTekija() + ", "
+                + resepti.getValmistusaika()+ ")");
+            lisaa.executeUpdate();
+            
+            ResultSet rs = lisaa.getGeneratedKeys();
+            int id = rs.getInt(1);
+            c.close();
+            
+            return id;
+            
+        }
+    }    
       
     //TODO: delete
 }
