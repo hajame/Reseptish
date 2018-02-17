@@ -10,16 +10,22 @@
 
         <p><a href="/haku">Haku</a><br/>
             <a href="/uusi">Luo uusi resepti</a> <br/>
-            <a href="/tilasto">Tilasto</a> <br/>
+            <a href="/reseptit">Kaikki reseptit</a><br/>
             <a href="/">Etusivu</a>
             
         </p> 
         
         <p>Reseptien määrä: <span th:text="${maara}"> </span> <br/>
-    
-        </p>
+
+        </p> 
         
-        
+        <p> Suosituimmat kategoriat:      <br/>
+        </p> 
+            <ul>
+            <li th:each="kategoria: ${kategoria}">
+                <span th:text="${kategoria.nimi}">kategoria</span>  <span th:text="${reseptimaara}"> </span> <br/>
+            </li>
+        </ul>
         
         
 
