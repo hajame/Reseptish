@@ -46,7 +46,7 @@ public class ReseptiKategoriaDao {
     //kategoriat suosituimmuusjärjestyksessä (montako reseptiä kategoriassa)  
      public Map<Kategoria, Integer> KategoriaCount() throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT Kategoria.nimi, COUNT(distinct Resepti.resepti_id) FROM ReseptiKategoria, Resepti, Kategoria WHERE Resepti.resepti_id=ReseptiKategoria.resepti_id AND ReseptiKategoria.kategoria_id=Kategoria.kategoria_id GROUP BY Kategoria.Kategoria_id ORDER BY COUNT(*) desc");
+            PreparedStatement ps = c.prepareStatement("SELECT Kategoria.nimi, COUNT(Resepti.resepti_id) FROM ReseptiKategoria, Resepti, Kategoria WHERE Resepti.resepti_id=ReseptiKategoria.resepti_id AND ReseptiKategoria.kategoria_id=Kategoria.kategoria_id GROUP BY Kategoria.Kategoria_id ORDER BY COUNT(Resepti.resepti_id) desc");
      
             Map<Kategoria, Integer> tulokset = new HashMap<>();
             

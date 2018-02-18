@@ -97,12 +97,12 @@ public class Main {
 
         //Tilastot
         Spark.get("/tilasto", (req, res) -> {
-            Map map = new HashMap<>();
+            Map kokonaismaara = new HashMap<>();
 
-            map.put("maara", reseptiDao.count());
+            kokonaismaara.put("maara", reseptiDao.count());
 
             //TODO: tilastojen hakeminen tietokannasta
-            return new ModelAndView(map, "tilasto");
+            return new ModelAndView(kokonaismaara, "tilasto");
         }, new ThymeleafTemplateEngine());
 
 
