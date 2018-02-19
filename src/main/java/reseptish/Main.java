@@ -89,13 +89,14 @@ public class Main {
                 String raakaaine = req.params("raaka-aine" + i);
                 String maara = req.params("maara" + i);
                 String yksikko = req.params("yksikko" + i);
+                String raakaaineOhje = req.params("raakaaineOhje"+i);
 
                 if (!raakaaine.isEmpty() && !(maara.isEmpty()) && !(yksikko.isEmpty())) {
 
                     raakaaineDao.add(raakaaine);
 
                     ReseptiRaakaaine uusi = new ReseptiRaakaaine(resepti,
-                            raakaaineDao.search(raakaaine), Integer.parseInt(maara), raakaaine, i, raakaaine);
+                            raakaaineDao.search(raakaaine), Integer.parseInt(maara), raakaaine, i, raakaaineOhje);
                             //  ei vielä valmis
                             //reseptiRaakaaineDao.add(resepti.getReseptiId, raakaaine.getRaakaaineId);   
                 }
