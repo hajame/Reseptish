@@ -80,6 +80,9 @@ public class Main {
             Resepti resepti = new Resepti(null, req.params("nimi"), req.params("ohje"),
                     req.params("tekija"), req.attribute("valmistusaika"));
             
+            //  palauttaa reseptin Id:n (ainakin teoriassa)
+            resepti.setReseptiId(reseptiDao.add(resepti));
+            
             //Kategorioiden lisääminen
             for (String kategoria : req.params("kategoriat").split(",")) {
                 kategoriaDao.add(kategoria);
@@ -87,8 +90,6 @@ public class Main {
                 //reseptiKategoriaDao.add(new ReseptiKategoria(resepti.getReseptiId(), ))
             }
 
-            //  palauttaa reseptin Id:n (ainakin teoriassa)
-            resepti.setReseptiId(reseptiDao.add(resepti));
 
             for (int i = 1; i < 16; i++) {
                 String raakaaine = req.params("raaka-aine" + i);
@@ -107,8 +108,8 @@ public class Main {
             }
 
             res.redirect("/resepti/" + resepti.getReseptiId());
-            return new ModelAndView(Collections.emptyMap(), "index");
-        }, new ThymeleafTemplateEngine());
+            return "";
+        });
 
         //Tilastot
         Spark.get("/tilasto", (req, res) -> {
