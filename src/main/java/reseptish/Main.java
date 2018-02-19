@@ -1,11 +1,14 @@
 package reseptish;
 
 import java.io.File;
+import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import reseptish.db.Database;
 import reseptish.db.KategoriaDao;
 import reseptish.db.RaakaaineDao;
@@ -78,14 +81,24 @@ public class Main {
         }, new ThymeleafTemplateEngine());
 
         Spark.post("/uusi", (req, res) -> {
-            Resepti resepti = new Resepti(null, req.params("nimi"), req.params("ohje"),
-                    req.params("tekija"), Integer.parseInt(req.params("valmistusaika")));
+            //POST bodyn parsiminen
+            Map<String, String> params = new HashMap<>();
+            System.out.println(req.body());
+            for (String param : req.body().split("&")) {
+                String[] split = param.split("=");
+                System.out.println(Arrays.toString(split));
+                params.put(split[0], split.length > 1 ? URLDecoder.decode(split[1], "UTF-8") : null);
+            }
+            
+            
+            Resepti resepti = new Resepti(null, params.get("nimi"), params.get("ohje"),
+                    params.get("tekija"), Integer.parseInt(params.get("valmistusaika")));
             
             //  palauttaa reseptin Id:n (ainakin teoriassa)
             resepti.setReseptiId(reseptiDao.add(resepti));
             
             //Kategorioiden lisääminen
-            String kategoriat = req.params("kategoriat");
+            String kategoriat = params.get("kategoriat");
             if (kategoriat != null && !kategoriat.isEmpty()) {
                 for (String kategoria : kategoriat.split(",")) {
                     kategoriaDao.add(kategoria);
@@ -95,10 +108,10 @@ public class Main {
             }
 
             for (int i = 1; i < 16; i++) {
-                String raakaaine = req.params("raaka-aine" + i);
-                String maara = req.params("maara" + i);
-                String yksikko = req.params("yksikko" + i);
-                String raakaaineOhje = req.params("raakaaineOhje"+i);
+                String raakaaine = params.get("raaka-aine" + i);
+                String maara = params.get("maara" + i);
+                String yksikko = params.get("yksikko" + i);
+                String raakaaineOhje = params.get("raakaaineOhje"+i);
 
                 if (!raakaaine.isEmpty() && !(maara.isEmpty()) && !(yksikko.isEmpty())) {
                     raakaaineDao.add(raakaaine);

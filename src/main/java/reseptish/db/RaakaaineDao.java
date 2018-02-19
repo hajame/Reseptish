@@ -53,7 +53,7 @@ public class RaakaaineDao {
     public Integer add(String nimi) throws SQLException {
         try (Connection c = db.getConnection()) {
             //Erilainen PostgreSQL:ssä
-            PreparedStatement lisaa = c.prepareStatement("INSERT INTO RaakaAine (nimi) VALUES (?) ON CONFLICT IGNORE");
+            PreparedStatement lisaa = c.prepareStatement("INSERT INTO RaakaAine (raakaaine_nimi) VALUES (?)");
             lisaa.setString(1, nimi);
             lisaa.executeUpdate();
             
@@ -66,7 +66,7 @@ public class RaakaaineDao {
     
     public Raakaaine search(String nimi) throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM RaakaAine WHERE nimi = ?");
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM RaakaAine WHERE raakaaine_nimi = ?");
             ps.setString(1, nimi);
             
             ResultSet rs = ps.executeQuery();

@@ -51,7 +51,7 @@ public class SQLiteDatabase implements Database {
 "	valmistusaika integer" +
 ");", "CREATE TABLE IF NOT EXISTS RaakaAine (" +
 "	raakaaine_id integer PRIMARY KEY," +
-"	raakaaine_nimi varchar(50) UNIQUE" +
+"	raakaaine_nimi varchar(50) UNIQUE ON CONFLICT IGNORE" +
 ");", "CREATE TABLE IF NOT EXISTS ReseptiRaakaAine (" +
 "	resepti_id integer," +
 "	raakaaine_id integer," +
@@ -63,7 +63,7 @@ public class SQLiteDatabase implements Database {
 "	FOREIGN KEY (raakaaine_id) REFERENCES RaakaAine(id)" +
 ");", "CREATE TABLE IF NOT EXISTS Kategoria (" +
 "	kategoria_id integer PRIMARY KEY," +
-"	kategoria_nimi varchar(50) UNIQUE" +
+"	kategoria_nimi varchar(50) UNIQUE ON CONFLICT IGNORE" +
 ");", "CREATE TABLE IF NOT EXISTS ReseptiKategoria (" +
 "	kategoria_id integer," +
 "	resepti_id integer," +

@@ -55,7 +55,7 @@ public class KategoriaDao {
     public Integer add(String nimi) throws SQLException {
         try (Connection c = db.getConnection()) {
             //Erilainen PostgreSQL:ssä
-            PreparedStatement lisaa = c.prepareStatement("INSERT INTO Kategoria (nimi) VALUES (?) ON CONFLICT IGNORE");
+            PreparedStatement lisaa = c.prepareStatement("INSERT INTO Kategoria (kategoria_nimi) VALUES (?)");
             lisaa.setString(1, nimi);
             lisaa.executeUpdate();
             
@@ -68,7 +68,7 @@ public class KategoriaDao {
     
     public Kategoria search(String nimi) throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM Kategoria WHERE nimi = ?");
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM Kategoria WHERE kategoria_nimi = ?");
             ps.setString(1, nimi);
             
             ResultSet rs = ps.executeQuery();
