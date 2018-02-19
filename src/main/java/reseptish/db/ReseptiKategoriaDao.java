@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import reseptish.pojo.Kategoria;
 import reseptish.pojo.ReseptiKategoria;
 import reseptish.pojo.ReseptiRaakaaine;
@@ -44,15 +45,15 @@ public class ReseptiKategoriaDao {
     }
      
     //kategoriat suosituimmuusjärjestyksessä (montako reseptiä kategoriassa)  
-     public Map<Kategoria, Integer> KategoriaCount() throws SQLException {
+     public Map<Integer, Kategoria> kategoriaCount() throws SQLException {
         try (Connection c = db.getConnection()) {
             PreparedStatement ps = c.prepareStatement("SELECT Kategoria.nimi, COUNT(Resepti.resepti_id) FROM ReseptiKategoria, Resepti, Kategoria WHERE Resepti.resepti_id=ReseptiKategoria.resepti_id AND ReseptiKategoria.kategoria_id=Kategoria.kategoria_id GROUP BY Kategoria.Kategoria_id ORDER BY COUNT(Resepti.resepti_id) desc");
      
-            Map<Kategoria, Integer> tulokset = new HashMap<>();
+            Map<Integer, Kategoria> tulokset = new TreeMap<>();
             
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                tulokset.put(Kategoria.rowToKategoria(rs), rs.getInt("COUNT(distinct Resepti.resepti_id)"));
+                tulokset.put(rs.getInt("COUNT(distinct Resepti.resepti_id)"), Kategoria.rowToKategoria(rs));
             }
             
             return tulokset;

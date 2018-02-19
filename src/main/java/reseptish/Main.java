@@ -1,6 +1,7 @@
 package reseptish;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -9,8 +10,10 @@ import reseptish.db.Database;
 import reseptish.db.KategoriaDao;
 import reseptish.db.RaakaaineDao;
 import reseptish.db.ReseptiDao;
+import reseptish.db.ReseptiKategoriaDao;
 import reseptish.db.ReseptiRaakaaineDao;
 import reseptish.db.SQLiteDatabase;
+import reseptish.pojo.Kategoria;
 import reseptish.pojo.Raakaaine;
 import reseptish.pojo.Resepti;
 import reseptish.pojo.ReseptiRaakaaine;
@@ -34,6 +37,7 @@ public class Main {
         ReseptiDao reseptiDao = new ReseptiDao(db);
         RaakaaineDao raakaaineDao = new RaakaaineDao(db);
         KategoriaDao kategoriaDao = new KategoriaDao(db);
+        ReseptiKategoriaDao reseptiKategoriaDao = new ReseptiKategoriaDao(db);
 
         //Etusivu
         Spark.get("/", (req, res) -> {
@@ -45,7 +49,7 @@ public class Main {
             Map map = new HashMap<>();
 
             List<ReseptiRaakaaine> reseptiJaRaakaaineet = reseptiRaakaaineDao.findAllForResepti(Integer.parseInt(req.params("id")));
-            Resepti resepti = reseptiJaRaakaaineet.get(0).getReseptiId();
+            Resepti resepti = reseptiJaRaakaaineet.get(0).getResepti();
 
             map.put("resepti", resepti);
             map.put("raakaaineet", reseptiJaRaakaaineet);
@@ -91,7 +95,7 @@ public class Main {
                     raakaaineDao.add(raakaaine);
 
                     ReseptiRaakaaine uusi = new ReseptiRaakaaine(resepti,
-                            raakaaineDao.search(raakaaine), maara, raakaaine, i, raakaaine);
+                            raakaaineDao.search(raakaaine), Integer.parseInt(maara), raakaaine, i, raakaaine);
                             //  ei vielä valmis
                             //reseptiRaakaaineDao.add(resepti.getReseptiId, raakaaine.getRaakaaineId);   
                 }
@@ -103,12 +107,20 @@ public class Main {
 
         //Tilastot
         Spark.get("/tilasto", (req, res) -> {
-            Map kokonaismaara = new HashMap<>();
+            Map map = new HashMap<>();
 
-            kokonaismaara.put("maara", reseptiDao.count());
+            map.put("maara", reseptiDao.count());
+            
+            //15 suosituinta kategoriaa
+            Map<Integer, Kategoria> kategoriaMap = reseptiKategoriaDao.kategoriaCount();
+            List<String> kategoriat = new ArrayList<>(15);
+            kategoriaMap.entrySet().stream().limit(15).forEach(e -> {
+                kategoriat.add(e.getValue()+" - "+e.getKey());
+            });
+            map.put("kategoriat", kategoriat);
 
             //TODO: tilastojen hakeminen tietokannasta
-            return new ModelAndView(kokonaismaara, "tilasto");
+            return new ModelAndView(map, "tilasto");
         }, new ThymeleafTemplateEngine());
 
 
