@@ -113,14 +113,16 @@ public class Main {
                 String yksikko = params.get("yksikko" + i);
                 String raakaaineOhje = params.get("raakaaineOhje"+i);
 
-                if (!raakaaine.isEmpty() && !(maara.isEmpty()) && !(yksikko.isEmpty())) {
-                    raakaaineDao.add(raakaaine);
-
-                    ReseptiRaakaaine uusi = new ReseptiRaakaaine(resepti,
-                            raakaaineDao.search(raakaaine), Integer.parseInt(maara), raakaaine, i, raakaaineOhje);
-                           
-                    reseptiRaakaaineDao.add(uusi);
+                if (raakaaine == null || raakaaine.isEmpty() || maara == null || maara.isEmpty() || yksikko == null || yksikko.isEmpty()) {
+                    continue;
                 }
+                
+                raakaaineDao.add(raakaaine);
+
+                ReseptiRaakaaine uusi = new ReseptiRaakaaine(resepti,
+                        raakaaineDao.search(raakaaine), Integer.parseInt(maara), raakaaine, i, raakaaineOhje);
+
+                reseptiRaakaaineDao.add(uusi);
             }
 
             res.redirect("/resepti/" + resepti.getReseptiId());
