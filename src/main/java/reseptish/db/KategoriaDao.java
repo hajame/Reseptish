@@ -52,7 +52,7 @@ public class KategoriaDao {
     }
     
     //Palauttaa lisätyn  kategorian ID:n tai null jos raaka-aine on jo tietokannassa
-     public Integer add(String nimi) throws SQLException {
+    public Integer add(String nimi) throws SQLException {
         try (Connection c = db.getConnection()) {
             //Erilainen PostgreSQL:ssä
             PreparedStatement lisaa = c.prepareStatement("INSERT INTO Kategoria (nimi) VALUES (?) ON CONFLICT IGNORE");
@@ -66,6 +66,16 @@ public class KategoriaDao {
         }
     }
     
+    public Kategoria search(String nimi) throws SQLException {
+        try (Connection c = db.getConnection()) {
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM Kategoria WHERE nimi = ?");
+            ps.setString(1, nimi);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            return rs.next() ? Kategoria.rowToKategoria(rs) : null;
+        }
+    }
     
 
 }

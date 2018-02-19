@@ -64,5 +64,16 @@ public class RaakaaineDao {
         }
     }
     
+    public Raakaaine search(String nimi) throws SQLException {
+        try (Connection c = db.getConnection()) {
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM RaakaAine WHERE nimi = ?");
+            ps.setString(1, nimi);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            return rs.next() ? Raakaaine.rowToRaakaaine(rs) : null;
+        }
+    }
+    
     //TODO: delete
 }
