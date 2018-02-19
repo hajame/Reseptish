@@ -88,7 +88,7 @@ public class ReseptiDao {
         try (Connection c = db.getConnection()) {
             //Erilainen PostgreSQL:ssä
             PreparedStatement lisaa = c.prepareStatement("INSERT INTO Resepti "
-                + "(nimi, ohje, tekija, valmistusaika) "
+                + "(resepti_nimi, ohje, tekija, valmistusaika) "
                 + "VALUES (?, ?, ?, ?)");
             lisaa.setString(1, resepti.getNimi());
             lisaa.setString(2, resepti.getOhje());
