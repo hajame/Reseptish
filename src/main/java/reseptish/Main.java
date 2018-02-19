@@ -16,6 +16,7 @@ import reseptish.db.SQLiteDatabase;
 import reseptish.pojo.Kategoria;
 import reseptish.pojo.Raakaaine;
 import reseptish.pojo.Resepti;
+import reseptish.pojo.ReseptiKategoria;
 import reseptish.pojo.ReseptiRaakaaine;
 import spark.ModelAndView;
 import spark.Spark;
@@ -89,7 +90,7 @@ public class Main {
                 for (String kategoria : kategoriat.split(",")) {
                     kategoriaDao.add(kategoria);
 
-                    //reseptiKategoriaDao.add(new ReseptiKategoria(resepti.getReseptiId(), ))
+                    reseptiKategoriaDao.add(new ReseptiKategoria(resepti, kategoriaDao.search(kategoria)));
                 }
             }
 
