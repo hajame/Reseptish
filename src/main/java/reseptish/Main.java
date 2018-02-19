@@ -84,12 +84,14 @@ public class Main {
             resepti.setReseptiId(reseptiDao.add(resepti));
             
             //Kategorioiden lisääminen
-            for (String kategoria : req.params("kategoriat").split(",")) {
-                kategoriaDao.add(kategoria);
-                
-                //reseptiKategoriaDao.add(new ReseptiKategoria(resepti.getReseptiId(), ))
-            }
+            String kategoriat = req.params("kategoriat");
+            if (kategoriat != null && !kategoriat.isEmpty()) {
+                for (String kategoria : kategoriat.split(",")) {
+                    kategoriaDao.add(kategoria);
 
+                    //reseptiKategoriaDao.add(new ReseptiKategoria(resepti.getReseptiId(), ))
+                }
+            }
 
             for (int i = 1; i < 16; i++) {
                 String raakaaine = req.params("raaka-aine" + i);
