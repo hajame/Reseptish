@@ -6,18 +6,25 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Resepti</title>
-        <meta charset="UTF-8"/>
-     <!-- 
+
+  <head>
+    <title>Resepti</title>
+    <meta charset="UTF-8" />
+    <!-- 
           <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
      tätä ei sallittu
      -->
-     
-    </head>
-    <body>
-        <h1 th:text="${resepti.nimi}">Reseptin nimi</h1>
 
-        <div><p></p>TODO write content</div>
+  </head>
+
+  <body>
+    <h1 th:text="${resepti.nimi}">Reseptin nimi</h1>
+
+    <ul>
+    
+      <li th:each="reseptiRaakaaine : ${raakaaineet}">
+        <span th:text="${reseptiRaakaaine.raakaaine.nimi}"></span>
+      </li>
+    </ul>
     </body>
 </html>
