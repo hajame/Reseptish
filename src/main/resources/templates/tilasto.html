@@ -19,14 +19,21 @@
 
         </p> 
         
-        <p> Suosituimmat kategoriat:      <br/>
+        <p>Suosituimmat kategoriat:      <br/>
         </p> 
             <ul>
-            <li th:each="kategoria: ${kategoria}">
-                <span th:text="${kategoria.nimi}">kategoria</span>  <span th:text="${reseptimaara}"> </span> <br/>
+            <li th:each="kategoria: ${kategoriat}">
+                <span th:text="${kategoria.nimi}">kategoria</span> 
             </li>
-        </ul>
+            </ul>
         
+         <p>Suosituimmat raaka-aineet:   <br/>
+        </p>
+            <ul>
+            <li th:each="raakaaine: ${raakaaine}">
+                <span th:text="${raakaaine.nimi}">raakaaine</span> 
+            </li>
+            </ul>
         
 
     </body>
