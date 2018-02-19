@@ -14,36 +14,36 @@ import java.util.Objects;
  * @author jaakko
  */
 public class ReseptiRaakaaine {
-    private Resepti reseptiId;
-    private Raakaaine raakaaineId;
+    private Resepti resepti;
+    private Raakaaine raakaaine;
     private Integer maara;
     private String yksikko;
     private Integer jarjestysluku;
     private String valmistusohje;
 
-    public ReseptiRaakaaine(Resepti reseptiId, Raakaaine raakaaineId, Integer maara, String yksikko, Integer jarjestysluku, String valmistusohje) {
-        this.reseptiId = reseptiId;
-        this.raakaaineId = raakaaineId;
+    public ReseptiRaakaaine(Resepti resepti, Raakaaine raakaaine, Integer maara, String yksikko, Integer jarjestysluku, String valmistusohje) {
+        this.resepti = resepti;
+        this.raakaaine = raakaaine;
         this.maara = maara;
         this.yksikko = yksikko;
         this.jarjestysluku = jarjestysluku;
         this.valmistusohje = valmistusohje;
     }
 
-    public Resepti getReseptiId() {
-        return reseptiId;
+    public Resepti getResepti() {
+        return resepti;
     }
 
-    public void setReseptiId(Resepti reseptiId) {
-        this.reseptiId = reseptiId;
+    public void setResepti(Resepti resepti) {
+        this.resepti = resepti;
     }
 
-    public Raakaaine getRaakaaineId() {
-        return raakaaineId;
+    public Raakaaine getRaakaaine() {
+        return raakaaine;
     }
 
-    public void setRaakaaineId(Raakaaine raakaaineId) {
-        this.raakaaineId = raakaaineId;
+    public void setRaakaaine(Raakaaine raakaaine) {
+        this.raakaaine = raakaaine;
     }
 
     public Integer getMaara() {
@@ -81,8 +81,8 @@ public class ReseptiRaakaaine {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.reseptiId);
-        hash = 97 * hash + Objects.hashCode(this.raakaaineId);
+        hash = 97 * hash + Objects.hashCode(this.resepti);
+        hash = 97 * hash + Objects.hashCode(this.raakaaine);
         hash = 97 * hash + Objects.hashCode(this.maara);
         hash = 97 * hash + Objects.hashCode(this.yksikko);
         hash = 97 * hash + Objects.hashCode(this.jarjestysluku);
@@ -108,10 +108,10 @@ public class ReseptiRaakaaine {
         if (!Objects.equals(this.valmistusohje, other.valmistusohje)) {
             return false;
         }
-        if (!Objects.equals(this.reseptiId, other.reseptiId)) {
+        if (!Objects.equals(this.resepti, other.resepti)) {
             return false;
         }
-        if (!Objects.equals(this.raakaaineId, other.raakaaineId)) {
+        if (!Objects.equals(this.raakaaine, other.raakaaine)) {
             return false;
         }
         if (!Objects.equals(this.maara, other.maara)) {

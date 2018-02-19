@@ -1,4 +1,5 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<<<<<<< HEAD
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Resepti</title>
@@ -26,5 +27,31 @@
             
         <p
         
+=======
+
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Resepti</title>
+    <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+
+  </head>
+
+  <body>
+    <h1 th:text="${resepti.nimi}">Reseptin nimi</h1>
+
+    <ul>
+    
+      <li th:each="reseptiRaakaaine : ${raakaaineet}">
+        <span th:text="${reseptiRaakaaine.raakaaine.nimi}"></span>
+      </li>
+    </ul>
+>>>>>>> e2bb22de200a073e95da4a4f6f982af4f4ec8229
     </body>
 </html>

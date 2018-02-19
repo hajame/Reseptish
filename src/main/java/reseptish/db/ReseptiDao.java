@@ -53,7 +53,7 @@ public class ReseptiDao {
     
     public List<Resepti> find(String query) throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM Resepti WHERE resepti_id LIKE ?");
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM Resepti WHERE resepti_nimi LIKE ?");
             ps.setString(1, "%"+query+"%");
             
             ResultSet rs = ps.executeQuery();
@@ -69,13 +69,13 @@ public class ReseptiDao {
     
     public int count() throws SQLException {
          try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT COUNT() FROM Resepti");
+            PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM Resepti");
             
             ResultSet rs = ps.executeQuery();
             
             
             if (rs.next()) {
-                return rs.getInt("COUNT()");
+                return rs.getInt("COUNT(*)");
             } else {
                 return 0;
             }           
@@ -83,5 +83,25 @@ public class ReseptiDao {
   
     }
     
+//Palauttaa lisätyn reseptin ID:n
+    public Integer add(Resepti resepti) throws SQLException {
+        try (Connection c = db.getConnection()) {
+            //Erilainen PostgreSQL:ssä
+            PreparedStatement lisaa = c.prepareStatement("INSERT INTO Resepti "
+                + "(resepti_nimi, ohje, tekija, valmistusaika) "
+                + "VALUES (?, ?, ?, ?)");
+            lisaa.setString(1, resepti.getNimi());
+            lisaa.setString(2, resepti.getOhje());
+            lisaa.setString(3, resepti.getTekija());
+            lisaa.setInt(4, resepti.getValmistusaika());
+            lisaa.executeUpdate();
+            
+            ResultSet rs = lisaa.getGeneratedKeys();
+            int id = rs.getInt(1);
+            
+            return id;
+        }
+    }    
+      
     //TODO: delete
 }

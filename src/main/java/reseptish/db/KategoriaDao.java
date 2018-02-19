@@ -11,49 +11,51 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import reseptish.pojo.Kategoria;
 import reseptish.pojo.Raakaaine;
-import reseptish.pojo.Resepti;
 
 /**
  *
- * @author jaakko
+ * @author hdheli
  */
-public class RaakaaineDao {
+public class KategoriaDao {
+
     private Database db;
 
-    public RaakaaineDao(Database db) {
+    public KategoriaDao(Database db) {
         this.db = db;
     }
-    
-    public List<Raakaaine> findAll() throws SQLException {
+
+    public List<Kategoria> findAll() throws SQLException {
         try (Connection c = db.getConnection()) {
-            List<Raakaaine> raakaaineet = new ArrayList<>();
-            
-            ResultSet rs = c.prepareStatement("SELECT * FROM RaakaAine").executeQuery();
+            List<Kategoria> kategoriat = new ArrayList<>();
+
+            ResultSet rs = c.prepareStatement("SELECT * FROM Kategoria").executeQuery();
             while (rs.next()) {
-                raakaaineet.add(Raakaaine.rowToRaakaaine(rs));
+                kategoriat.add(Kategoria.rowToKategoria(rs));
             }
-            
-            return raakaaineet;
+
+            return kategoriat;
+
         }
     }
     
-    public Raakaaine findOne(int id) throws SQLException {
+    public Kategoria findOne(int id) throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM RaakaAine WHERE raakaaine_id = ?");
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM Kategoria WHERE kategoria_id = ?");
             ps.setInt(1, id);
             
             ResultSet rs = ps.executeQuery();
                     
-            return rs.next() ? Raakaaine.rowToRaakaaine(rs) : null;
+            return rs.next() ? Kategoria.rowToKategoria(rs) : null;
         }
     }
     
-    //Palauttaa lisätyn raaka-aineen ID:n tai null jos raaka-aine on jo tietokannassa
+    //Palauttaa lisätyn  kategorian ID:n tai null jos raaka-aine on jo tietokannassa
     public Integer add(String nimi) throws SQLException {
         try (Connection c = db.getConnection()) {
             //Erilainen PostgreSQL:ssä
-            PreparedStatement lisaa = c.prepareStatement("INSERT INTO RaakaAine (raakaaine_nimi) VALUES (?)");
+            PreparedStatement lisaa = c.prepareStatement("INSERT INTO Kategoria (kategoria_nimi) VALUES (?)");
             lisaa.setString(1, nimi);
             lisaa.executeUpdate();
             
@@ -64,16 +66,16 @@ public class RaakaaineDao {
         }
     }
     
-    public Raakaaine search(String nimi) throws SQLException {
+    public Kategoria search(String nimi) throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM RaakaAine WHERE raakaaine_nimi = ?");
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM Kategoria WHERE kategoria_nimi = ?");
             ps.setString(1, nimi);
             
             ResultSet rs = ps.executeQuery();
             
-            return rs.next() ? Raakaaine.rowToRaakaaine(rs) : null;
+            return rs.next() ? Kategoria.rowToKategoria(rs) : null;
         }
     }
     
-    //TODO: delete
+
 }
