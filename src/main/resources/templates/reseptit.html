@@ -19,7 +19,7 @@
         <ul>
             <li th:each="resepti: ${reseptit}">
                 <b><a th:href="@{~/resepti/}+${resepti.reseptiId}"><span th:text="${resepti.nimi}">reseptin nimi</span></a></b> - <span th:text="${resepti.valmistusaika}">valmistusaika</span>min<br/>
-                <span th:text="$resepti.tekija">tekija</span>
+                <span th:text="${resepti.tekija}">tekija</span>
             </li>
         </ul>
 
