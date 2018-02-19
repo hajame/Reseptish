@@ -139,9 +139,20 @@ public class Main {
             Map<Integer, Kategoria> kategoriaMap = reseptiKategoriaDao.kategoriaCount();
             List<String> kategoriat = new ArrayList<>(15);
             kategoriaMap.entrySet().stream().limit(15).forEach(e -> {
-                kategoriat.add(e.getValue()+" - "+e.getKey());
+                kategoriat.add(e.getValue().getNimi()+" - "+e.getKey());
             });
             map.put("kategoriat", kategoriat);
+            
+            //15 suosituinta raaka-ainetta
+            
+            Map<Integer, Raakaaine> raakaaineMap = reseptiRaakaaineDao.raakaAineCount();
+            List<String> raakaaineet = new ArrayList<>(15);
+            raakaaineMap.entrySet().stream().limit(15).forEach(e -> {
+                raakaaineet.add(e.getValue().getNimi()+" - "+e.getKey());
+            });
+            map.put("raakaaineet", raakaaineet);
+            
+            
 
             //TODO: tilastojen hakeminen tietokannasta
             return new ModelAndView(map, "tilasto");
