@@ -89,17 +89,17 @@ public class ReseptiDao {
             //Erilainen PostgreSQL:ssä
             PreparedStatement lisaa = c.prepareStatement("INSERT INTO Resepti "
                 + "(nimi, ohje, tekija, valmistusaika) "
-                + "VALUES (" + resepti.getNimi() + ", "
-                + resepti.getOhje() + ", " + resepti.getTekija() + ", "
-                + resepti.getValmistusaika()+ ")");
+                + "VALUES (?, ?, ?, ?)");
+            lisaa.setString(1, resepti.getNimi());
+            lisaa.setString(2, resepti.getOhje());
+            lisaa.setString(3, resepti.getTekija());
+            lisaa.setInt(4, resepti.getValmistusaika());
             lisaa.executeUpdate();
             
             ResultSet rs = lisaa.getGeneratedKeys();
             int id = rs.getInt(1);
-            c.close();
             
             return id;
-            
         }
     }    
       
