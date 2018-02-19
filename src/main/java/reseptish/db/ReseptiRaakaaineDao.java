@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import reseptish.pojo.Raakaaine;
 import reseptish.pojo.ReseptiRaakaaine;
 
@@ -58,18 +59,36 @@ public class ReseptiRaakaaineDao {
         }
     }
     
-    public Map<Raakaaine, Integer> raakaAineCount() throws SQLException {
+    public Map<Integer, Raakaaine> raakaAineCount() throws SQLException {
         try (Connection c = db.getConnection()) {
             PreparedStatement ps = c.prepareStatement("SELECT *, count(ReseptiRaakaAine.resepti_id) FROM ReseptiRaakaAine, RaakaAine WHERE RaakaAine.raakaaine_id = ReseptiRaakaAine.raakaaine_id GROUP BY RaakaAine.raakaaine_id");
      
-            Map<Raakaaine, Integer> tulokset = new HashMap<>();
+            Map<Integer, Raakaaine> tulokset = new TreeMap<>();
             
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                tulokset.put(Raakaaine.rowToRaakaaine(rs), rs.getInt("count(ReseptiRaakaAine.resepti_id)"));
+                tulokset.put(rs.getInt("count(ReseptiRaakaAine.resepti_id)"), Raakaaine.rowToRaakaaine(rs));
             }
             
             return tulokset;
+        }
+    }
+    
+    public Integer add(ReseptiRaakaaine reseptiRaakaaine) throws SQLException {
+        try (Connection c = db.getConnection()) {
+            PreparedStatement ps = c.prepareStatement("INSERT INTO ReseptiRaakaaine (resepti_id, raakaaine_id, maara, yksikko, jarjestysluku, valmistusohje) VALUES (?,?,?,?,?,?)");
+            ps.setInt(1, reseptiRaakaaine.getResepti().getReseptiId());
+            ps.setInt(2, reseptiRaakaaine.getRaakaaine().getRaakaaineId());
+            ps.setInt(3, reseptiRaakaaine.getMaara());
+            ps.setString(4, reseptiRaakaaine.getYksikko());
+            ps.setInt(5, reseptiRaakaaine.getJarjestysluku());
+            ps.setString(6, reseptiRaakaaine.getValmistusohje());
+            
+            ps.executeUpdate();
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            
+            return rs.next() ? rs.getInt(1) : null;
         }
     }
 }
