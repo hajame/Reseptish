@@ -11,6 +11,7 @@ import reseptish.db.RaakaaineDao;
 import reseptish.db.ReseptiDao;
 import reseptish.db.ReseptiRaakaaineDao;
 import reseptish.db.SQLiteDatabase;
+import reseptish.pojo.Raakaaine;
 import reseptish.pojo.Resepti;
 import reseptish.pojo.ReseptiRaakaaine;
 import spark.ModelAndView;
@@ -73,7 +74,7 @@ public class Main {
 
         Spark.post("/uusi", (req, res) -> {
 
-            Resepti resepti = new Resepti(0, req.params("nimi"), req.params("ohje"),
+            Resepti resepti = new Resepti(null, req.params("nimi"), req.params("ohje"),
                     req.params("tekija"), req.attribute("valmistusaika"));
             kategoriaDao.add(req.params("kategoria"));
 
@@ -81,13 +82,17 @@ public class Main {
             resepti.setReseptiId(reseptiDao.add(resepti));
 
             for (int i = 1; i < 16; i++) {
-                String raakaaine = req.params("maara" + i);
+                String raakaaine = req.params("raaka-aine" + i);
+                String maara = req.params("maara" + i);
+                String yksikko = req.params("yksikko" + i);
 
-                if (!raakaaine.isEmpty()) {
+                if (!raakaaine.isEmpty() && !(maara.isEmpty()) && !(yksikko.isEmpty())) {
+
                     raakaaineDao.add(raakaaine);
 
-                    //  ei vielä valmis
-//                  reseptiRaakaaineDao.add(resepti.getReseptiId, raakaaine.getRaakaaineId);   
+                    ReseptiRaakaaine uusi = new ReseptiRaakaaine(resepti,
+                            raakaaineDao.search(raakaaine), maara, raakaaine, i, raakaaine) //  ei vielä valmis
+                            //                  reseptiRaakaaineDao.add(resepti.getReseptiId, raakaaine.getRaakaaineId);   
                 }
             }
 
