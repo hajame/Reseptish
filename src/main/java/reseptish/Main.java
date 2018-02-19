@@ -77,10 +77,15 @@ public class Main {
         }, new ThymeleafTemplateEngine());
 
         Spark.post("/uusi", (req, res) -> {
-
             Resepti resepti = new Resepti(null, req.params("nimi"), req.params("ohje"),
                     req.params("tekija"), req.attribute("valmistusaika"));
-            kategoriaDao.add(req.params("kategoria"));
+            
+            //Kategorioiden lisääminen
+            for (String kategoria : req.params("kategoriat").split(",")) {
+                kategoriaDao.add(kategoria);
+                
+                //reseptiKategoriaDao.add(new ReseptiKategoria(resepti.getReseptiId(), ))
+            }
 
             //  palauttaa reseptin Id:n (ainakin teoriassa)
             resepti.setReseptiId(reseptiDao.add(resepti));
@@ -92,7 +97,6 @@ public class Main {
                 String raakaaineOhje = req.params("raakaaineOhje"+i);
 
                 if (!raakaaine.isEmpty() && !(maara.isEmpty()) && !(yksikko.isEmpty())) {
-
                     raakaaineDao.add(raakaaine);
 
                     ReseptiRaakaaine uusi = new ReseptiRaakaaine(resepti,
