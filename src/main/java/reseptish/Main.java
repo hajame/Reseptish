@@ -91,8 +91,9 @@ public class Main {
                     raakaaineDao.add(raakaaine);
 
                     ReseptiRaakaaine uusi = new ReseptiRaakaaine(resepti,
-                            raakaaineDao.search(raakaaine), maara, raakaaine, i, raakaaine) //  ei vielä valmis
-                            //                  reseptiRaakaaineDao.add(resepti.getReseptiId, raakaaine.getRaakaaineId);   
+                            raakaaineDao.search(raakaaine), maara, raakaaine, i, raakaaine);
+                            //  ei vielä valmis
+                            //reseptiRaakaaineDao.add(resepti.getReseptiId, raakaaine.getRaakaaineId);   
                 }
             }
 
