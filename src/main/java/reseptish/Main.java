@@ -56,7 +56,7 @@ public class Main {
         Spark.get("/reseptit", (req, res) -> {
             HashMap map = new HashMap<>();
 
-            map.put("resepti", reseptiDao.findAll());
+            map.put("reseptit", reseptiDao.findAll());
 
             return new ModelAndView(map, "reseptit");
         }, new ThymeleafTemplateEngine());
