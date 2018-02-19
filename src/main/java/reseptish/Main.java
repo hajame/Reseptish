@@ -107,7 +107,7 @@ public class Main {
                 }
             }
 
-            for (int i = 1; i < 16; i++) {
+            for (int i = 1; i < 15; i++) {
                 String raakaaine = params.get("raaka-aine" + i);
                 String maara = params.get("maara" + i);
                 String yksikko = params.get("yksikko" + i);
