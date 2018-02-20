@@ -5,10 +5,12 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import reseptish.db.Database;
 import reseptish.db.KategoriaDao;
 import reseptish.db.RaakaaineDao;
@@ -136,12 +138,18 @@ public class Main {
             map.put("maara", reseptiDao.count());
             
             //15 suosituinta kategoriaa
+           
             Map<Integer, Kategoria> kategoriaMap = reseptiKategoriaDao.kategoriaCount();
-            List<String> kategoriat = new ArrayList<>(15);
-            kategoriaMap.entrySet().stream().limit(15).forEach(e -> {
+            List<String> kategoriat = new ArrayList<>();
+            kategoriaMap.entrySet().stream().forEach(e -> {
                 kategoriat.add(e.getValue().getNimi()+" - "+e.getKey());
             });
-            map.put("kategoriat", kategoriat);
+            
+            Comparator<String> comp = (aKategoria, bKategoria) -> aKategoria.compareTo(bKategoria);
+            ArrayList<String> jarjkategoriat=kategoriat.stream().sorted(comp.reversed()).limit(15).collect(Collectors.toCollection(ArrayList::new));
+            
+    
+            map.put("kategoriat", jarjkategoriat);
             
             //15 suosituinta raaka-ainetta
             

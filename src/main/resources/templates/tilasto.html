@@ -19,19 +19,19 @@
 
         </p> 
         
-        <p>Suosituimmat kategoriat:      <br/>
+        <p>Epä-suosituimmat kategoriat:      <br/>
         </p> 
             <ul>
             <li th:each="kategoria: ${kategoriat}">
-            <span th:text="${kategoriat}"> </span> 
+                <span th:text="${kategoria}">kategorian nimi </span>
             </li>
             </ul>
         
-         <p>Suosituimmat raaka-aineet:   <br/>
+         <p>Epä-suosituimmat raaka-aineet:   <br/>
         </p>
             <ul>
             <li th:each="raakaaine: ${raakaaineet}">
-            <span th:text="${raakaaineet}"> </span> 
+                <span th:text="${raakaaine}"> raaka-aineen nimi </span> 
             </li>
             </ul>
         
