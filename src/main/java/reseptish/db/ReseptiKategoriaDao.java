@@ -53,7 +53,7 @@ public class ReseptiKategoriaDao {
             
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                tulokset.put(rs.getInt("COUNT(Resepti.resepti_id)"), Kategoria.rowToKategoria(rs));
+                tulokset.put(rs.getInt("COUNT(ReseptiKategoria.resepti_id)"), Kategoria.rowToKategoria(rs));
             }
             
             return tulokset;
