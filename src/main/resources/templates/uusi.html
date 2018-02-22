@@ -16,7 +16,7 @@
       
     </style>
   </head>
-
+    
   <body>
     <h1>Luo uusi resepti</h1>
 
@@ -47,7 +47,7 @@
         
       </div>
 
-      <div class="rivi" id="2" style="display:">
+      <div class="rivi" id="2" style="display:none">
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine2" size="14"/>
         <label>määrä: </label>
@@ -58,7 +58,7 @@
         <input type="text" name="raakaaineOhje2" size="14"/>
         <br/>
       </div>
-      <div class="rivi" id="3" style="display:">
+      <div class="rivi" id="3" style="display:none">
         <label>raaka-aine: </label>
         <input type="text" name="raaka-aine3" size="14"/>
         <label>määrä: </label>
@@ -222,6 +222,33 @@
       <a href="/reseptit">Kaikki reseptit</a>
       <br/>
     </p>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        window.onload = function() {
+            var nodes = document.getElementsByClassName("rivi");
+            
+            for (var i = 0; i < nodes.length; i++) {
+                var rivi = nodes[i];
+
+                var children = rivi.children;
+                for (var j = 0; j < children.length; j++) {
+                    var input = children[j];
+                    if (input.tagName === "INPUT") {
+                        //alert("Lisatty event listener riville: "+rivi.id);
+                        input.addEventListener('input', function() {
+                            var seuraavaId = this.parentElement.id;
+                            seuraavaId++;
+                            alert("Näytetään "+seuraavaId);
+                            document.getElementById(seuraavaId).style.display = "block";
+                        });
+                    }
+                }
+            }
+        }
+        //]]>
+    </script>
+    
   </body>
 
 </html>
