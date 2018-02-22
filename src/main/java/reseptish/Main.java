@@ -1,6 +1,7 @@
 package reseptish;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +25,7 @@ import reseptish.pojo.Resepti;
 import reseptish.pojo.ReseptiKategoria;
 import reseptish.pojo.ReseptiRaakaaine;
 import spark.ModelAndView;
+import spark.Request;
 import spark.Spark;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.OpiskelijaDao;
@@ -76,22 +78,29 @@ public class Main {
         Spark.get("/haku", (req, res) -> {
             return new ModelAndView(Collections.emptyMap(), "haku");
         }, new ThymeleafTemplateEngine());
-
+        Spark.post("/haku", (req, res) -> {
+            Map<String, String> params = parseBody(req);
+            
+            Map map = new HashMap<>();
+            
+            String hakutyyppi = params.get("hakutyyppi");
+            if ("resepti".equals(hakutyyppi)) {
+                map.put("reseptit", reseptiDao.find(params.get("resepti")));
+            } else if ("raakaAine".equals(hakutyyppi)) {
+                //TODO: hakeminen raaka-aineen perusteella
+            }
+            
+            return new ModelAndView(map, "haku");
+        }, new ThymeleafTemplateEngine());
+        
+        
         //Uusi
         Spark.get("/uusi", (req, res) -> {
             return new ModelAndView(Collections.emptyMap(), "uusi");
         }, new ThymeleafTemplateEngine());
 
         Spark.post("/uusi", (req, res) -> {
-            //POST bodyn parsiminen
-            Map<String, String> params = new HashMap<>();
-            System.out.println(req.body());
-            for (String param : req.body().split("&")) {
-                String[] split = param.split("=");
-                System.out.println(Arrays.toString(split));
-                params.put(split[0], split.length > 1 ? URLDecoder.decode(split[1], "UTF-8") : null);
-            }
-            
+            Map<String, String> params = parseBody(req);
             
             Resepti resepti = new Resepti(null, params.get("nimi"), params.get("ohje"),
                     params.get("tekija"), Integer.parseInt(params.get("valmistusaika")));
@@ -173,5 +182,20 @@ public class Main {
 
             return new ModelAndView(map, "opiskelija");
         }, new ThymeleafTemplateEngine());*/
+    }
+    
+    /**
+     * Spark ei anna parametrejä oikein
+     **/
+    private static Map<String, String> parseBody(Request req) throws UnsupportedEncodingException {
+        //POST bodyn parsiminen
+        Map<String, String> params = new HashMap<>();
+        System.out.println(req.body());
+        for (String param : req.body().split("&")) {
+            String[] split = param.split("=");
+            System.out.println(Arrays.toString(split));
+            params.put(split[0], split.length > 1 ? URLDecoder.decode(split[1], "UTF-8") : null);
+        }
+        return params;
     }
 }
