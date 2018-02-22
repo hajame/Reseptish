@@ -55,13 +55,13 @@ public class Main {
         //Yksittäinen resepti
         Spark.get("/resepti/:id", (req, res) -> {
             Map map = new HashMap<>();
-//            List<ReseptiKategoria> reseptiKategoriat = reseptiKategoriaDao.getReseptiKategoriat("id");
+            List<ReseptiKategoria> reseptiKategoriat = reseptiKategoriaDao.findAllForResepti(Integer.parseInt(req.params("id")));
             List<ReseptiRaakaaine> reseptiJaRaakaaineet = reseptiRaakaaineDao.findAllForResepti(Integer.parseInt(req.params("id")));
             Resepti resepti = reseptiJaRaakaaineet.get(0).getResepti();
 
             map.put("resepti", resepti);
             map.put("raakaaineet", reseptiJaRaakaaineet);
-//            map.put("kategoriat", reseptiKategoriat);
+            map.put("kategoriat", reseptiKategoriat);
 
             return new ModelAndView(map, "soloresepti");
         }, new ThymeleafTemplateEngine());

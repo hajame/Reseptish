@@ -46,6 +46,22 @@ public class ReseptiKategoriaDao {
         }
     }
      
+    public List<ReseptiKategoria> findAllForResepti(int id) throws SQLException {
+        try (Connection c = db.getConnection()) {
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM ReseptiKategoria, Resepti, Kategoria WHERE ReseptiKategoria.resepti_id = Resepti.resepti_id AND Kategoria.kategoria_id = ReseptiKategoria.kategoria_id AND Resepti.resepti_id = ?");
+            ps.setInt(1, id);
+            
+            List<ReseptiKategoria> kategoriat = new ArrayList<>();
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                kategoriat.add(ReseptiKategoria.rowToReseptiKategoria(rs));
+            }
+            
+            return kategoriat;
+        }
+    }     
+     
     //kategoriat suosituimmuusjärjestyksessä (montako reseptiä kategoriassa)  
      public Map<Integer, Kategoria> kategoriaCount() throws SQLException {
         try (Connection c = db.getConnection()) {
