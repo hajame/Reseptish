@@ -87,7 +87,7 @@ public class Main {
             if ("resepti".equals(hakutyyppi)) {
                 map.put("reseptit", reseptiDao.find(params.get("resepti")));
             } else if ("raakaAine".equals(hakutyyppi)) {
-                //TODO: hakeminen raaka-aineen perusteella
+                map.put("reseptit", reseptiRaakaaineDao.findReseptiWithRaakaaaine(params.get("resepti")));
             }
             
             return new ModelAndView(map, "haku");
