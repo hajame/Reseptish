@@ -16,12 +16,24 @@ and open the template in the editor.
 
   <body>
     <h1 th:text="${resepti.nimi}">Reseptin nimi</h1>
-
+    <dl>
+        
+        <dt><b>Kategoria</b></dt>
+        <dd></dd>
+        <dt><b>Valmistusaika</b></dt>
+        <dd><span th:text="${resepti.valmistusaika}"></span> min</dd>
+        <dt><b>Tekijä</b></dt>
+        <dd><span th:text="${resepti.tekija}"></span></dd>
+        
+    </dl>
     <ul>
-    
       <li th:each="reseptiRaakaaine : ${raakaaineet}">
-        <span th:text="${reseptiRaakaaine.raakaaine.nimi}"></span>
+        <span th:text="${reseptiRaakaaine.raakaaine.nimi}">raaka-aineen nimi</span>
+        (<span th:text="${reseptiRaakaaine.maara}">määrä</span> <span th:text="${reseptiRaakaaine.yksikko}">yksikkö</span>)
       </li>
     </ul>
+    
+    <p><b>Ohje: </b> <span th:text="${resepti.ohje}">ohje</span>
+    </p>
     </body>
 </html>
