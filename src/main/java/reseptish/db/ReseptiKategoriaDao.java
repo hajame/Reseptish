@@ -10,9 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 import reseptish.pojo.Kategoria;
 import reseptish.pojo.ReseptiKategoria;
@@ -47,14 +49,20 @@ public class ReseptiKategoriaDao {
     //kategoriat suosituimmuusjärjestyksessä (montako reseptiä kategoriassa)  
      public Map<Integer, Kategoria> kategoriaCount() throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT *, COUNT(ReseptiKategoria.resepti_id) FROM ReseptiKategoria, Resepti, Kategoria WHERE Resepti.resepti_id=ReseptiKategoria.resepti_id AND ReseptiKategoria.kategoria_id=Kategoria.kategoria_id GROUP BY Kategoria.Kategoria_id ORDER BY COUNT(Resepti.resepti_id) desc");
+            PreparedStatement ps = c.prepareStatement("SELECT *, COUNT(ReseptiKategoria.resepti_id) FROM ReseptiKategoria, Resepti, Kategoria WHERE Resepti.resepti_id=ReseptiKategoria.resepti_id AND ReseptiKategoria.kategoria_id=Kategoria.kategoria_id GROUP BY Kategoria.Kategoria_id");
      
-            Map<Integer, Kategoria> tulokset = new TreeMap<>();
+            Map<Integer, Kategoria> tulokset = new TreeMap<>(Comparator.reverseOrder());
+                 
             
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 tulokset.put(rs.getInt("COUNT(ReseptiKategoria.resepti_id)"), Kategoria.rowToKategoria(rs));
             }
+          
+//            for (Map.Entry<Integer, Kategoria> entry : tulokset.entrySet()) {
+//             System.out.println(entry.getKey()+" : "+entry.getValue());
+//                }
+            
             
             return tulokset;
         }

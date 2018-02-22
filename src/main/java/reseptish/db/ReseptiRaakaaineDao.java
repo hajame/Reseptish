@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +65,7 @@ public class ReseptiRaakaaineDao {
         try (Connection c = db.getConnection()) {
             PreparedStatement ps = c.prepareStatement("SELECT *, count(ReseptiRaakaAine.resepti_id) FROM ReseptiRaakaAine, RaakaAine WHERE RaakaAine.raakaaine_id = ReseptiRaakaAine.raakaaine_id GROUP BY RaakaAine.raakaaine_id");
      
-            Map<Integer, Raakaaine> tulokset = new TreeMap<>();
+            Map<Integer, Raakaaine> tulokset = new TreeMap<>(Comparator.reverseOrder());
             
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

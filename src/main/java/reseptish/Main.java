@@ -147,18 +147,15 @@ public class Main {
             map.put("maara", reseptiDao.count());
             
             //15 suosituinta kategoriaa
-           
+     
             Map<Integer, Kategoria> kategoriaMap = reseptiKategoriaDao.kategoriaCount();
-            List<String> kategoriat = new ArrayList<>();
-            kategoriaMap.entrySet().stream().forEach(e -> {
+            List<String> kategoriat = new ArrayList<>(15);
+            kategoriaMap.entrySet().stream().limit(15).forEach(e -> {
                 kategoriat.add(e.getValue().getNimi()+" - "+e.getKey());
             });
             
-            Comparator<String> comp = (aKategoria, bKategoria) -> aKategoria.compareTo(bKategoria);
-            ArrayList<String> jarjkategoriat=kategoriat.stream().sorted(comp.reversed()).limit(15).collect(Collectors.toCollection(ArrayList::new));
-            
-    
-            map.put("kategoriat", jarjkategoriat);
+             map.put("kategoriat", kategoriat);
+
             
             //15 suosituinta raaka-ainetta
             
@@ -169,7 +166,7 @@ public class Main {
             });
             map.put("raakaaineet", raakaaineet);
             
-            
+
 
             //TODO: tilastojen hakeminen tietokannasta
             return new ModelAndView(map, "tilasto");
