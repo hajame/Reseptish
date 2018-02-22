@@ -131,7 +131,7 @@ public class Main {
                 raakaaineDao.add(raakaaine);
 
                 ReseptiRaakaaine uusi = new ReseptiRaakaaine(resepti,
-                        raakaaineDao.search(raakaaine), Integer.parseInt(maara), raakaaine, i, raakaaineOhje);
+                        raakaaineDao.search(raakaaine), Integer.parseInt(maara), yksikko, i, raakaaineOhje);
 
                 reseptiRaakaaineDao.add(uusi);
             }
