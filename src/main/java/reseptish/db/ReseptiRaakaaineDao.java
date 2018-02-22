@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import reseptish.pojo.Raakaaine;
+import reseptish.pojo.Resepti;
 import reseptish.pojo.ReseptiRaakaaine;
 
 /**
@@ -89,6 +90,22 @@ public class ReseptiRaakaaineDao {
             ResultSet rs = ps.getGeneratedKeys();
             
             return rs.next() ? rs.getInt(1) : null;
+        }
+    }
+    
+    public List<Resepti> findReseptiWithRaakaaaine(String raakaaine) throws SQLException {
+        try (Connection c = db.getConnection()) {
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM ReseptiRaakaAine, Resepti, RaakaAine WHERE ReseptiRaakaAine.resepti_id = Resepti.resepti_id AND RaakaAine.raakaaine_id = ReseptiRaakaAine.raakaaine_id AND RaakaAine.raakaaine_nimi LIKE ?");
+            ps.setString(1, "%"+raakaaine+"%");
+            
+            List<Resepti> resepti = new ArrayList<>();
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                resepti.add(Resepti.rowToResepti(rs));
+            }
+            
+            return resepti;
         }
     }
 }
