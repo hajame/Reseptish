@@ -3,12 +3,30 @@
     <head>
         <title>Tilastot</title>
             <meta charset="utf-8" />
-            <link rel="stylesheet" href="ulkoasu.css"></link>
+            <style>
+                body {
+                font-family: 'OpenSans', bold;
+      
+
+            }
+            
+             th {
+                background-color: MediumSeaGreen;
+                color: white;
+                padding: 10px;
+                font-family: 'OpenSans', bold;
+            }
+    
+            </style>
+            
+            <link rel="stylesheet" href="ulkoasu.css"/>
     </head>
 
     <body>
         <h1>Tilastot</h1>
-
+        
+ 
+        
         <p><a href="/haku">Haku</a><br/>
             <a href="/uusi">Luo uusi resepti</a> <br/>
             <a href="/reseptit">Kaikki reseptit</a><br/>
@@ -16,26 +34,53 @@
             
         </p> 
         
+        <table>
+            <tr>
+                <th>
         <p>Reseptien määrä: <span th:text="${maara}"> </span> <br/>
-
         </p> 
+                </th>
+            </tr>
+        </table>    
+       
         
-        <p>Suosituimmat kategoriat: (kategoria - reseptien määrä kategoriassa)     <br/>
+        <table>
+            <tr>
+                <th>
+        <p>Suosituimmat kategoriat: (kategoria - reseptimäärä)     <br/>
         </p> 
+                </th>
+            <tr>
+                <td>
             <ul>
             <li th:each="kategoria: ${kategoriat}">
                 <span th:text="${kategoria}">kategorian nimi </span>
             </li>
             </ul>
-        
-         <p>Suosituimmat raaka-aineet: (raaka-aine - reseptimäärä joissa raaka-ainetta)   <br/>
+                </td>         
+            </tr>
+            
+            </tr>
+        </table>
+     
+        <table>
+            <tr>
+                <th>
+        <p>Suosituimmat raaka-aineet: (raaka-aine - reseptimäärä)   <br/>        
         </p>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    
             <ul>
             <li th:each="raakaaine: ${raakaaineet}">
                 <span th:text="${raakaaine}"> raaka-aineen nimi </span> 
             </li>
             </ul>
+                </td>         
+            </tr>
         
-
+        </table>
     </body>
 </html>
