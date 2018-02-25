@@ -2,32 +2,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Tilastot</title>
-            <meta charset="utf-8" />
-            <style>
-                body {
+            <meta charset="utf-8" />         
+        <style>
+            body {
                 font-family: 'OpenSans', bold;
-      
-
             }
             
-             th {
-                background-color: MediumSeaGreen;
+            p.one {
+                background-color: MediumSeaGreen;   
+            }
+            
+            
+            a  {
                 color: white;
-                padding: 10px;
+            }
+            
+            th {
+                 border-style: solid;
+                border-width: medium;
+                color: MediumSeaGreen;     
+             
+                color: MediumSeaGreen;
+                padding: 5px;
                 font-family: 'OpenSans', bold;
             }
     
             </style>
-            
-            <link rel="stylesheet" href="ulkoasu.css"/>
+                  
+            <link href="../static/css/ulkoasu.css"  rel="stylesheet" />
     </head>
 
     <body>
         <h1>Tilastot</h1>
         
- 
         
-        <p><a href="/haku">Haku</a><br/>
+        <p class="one"><a href="/haku">Haku</a><br/>
             <a href="/uusi">Luo uusi resepti</a> <br/>
             <a href="/reseptit">Kaikki reseptit</a><br/>
             <a href="/">Etusivu</a>
