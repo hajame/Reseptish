@@ -61,17 +61,19 @@ public class ReseptiRaakaaineDao {
         }
     }
     
-    public Map<Integer, Raakaaine> raakaAineCount() throws SQLException {
+    public Map<String, Integer> raakaAineCount() throws SQLException {
         try (Connection c = db.getConnection()) {
             PreparedStatement ps = c.prepareStatement("SELECT *, count(ReseptiRaakaAine.resepti_id) FROM ReseptiRaakaAine, RaakaAine WHERE RaakaAine.raakaaine_id = ReseptiRaakaAine.raakaaine_id GROUP BY RaakaAine.raakaaine_id");
      
-            Map<Integer, Raakaaine> tulokset = new TreeMap<>(Comparator.reverseOrder());
+            Map<String, Integer> tulokset = new TreeMap<>();
             
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                tulokset.put(rs.getInt("count(ReseptiRaakaAine.resepti_id)"), Raakaaine.rowToRaakaaine(rs));
+                //System.out.println(rs.getInt("count(ReseptiRaakaAine.resepti_id)"));
+                tulokset.put(rs.getString("Raakaaine_nimi"), rs.getInt("count(ReseptiRaakaAine.resepti_id)"));
             }
-            
+         
+            //System.out.println(tulokset);
             return tulokset;
         }
     }

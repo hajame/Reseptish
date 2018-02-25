@@ -148,22 +148,22 @@ public class Main {
             map.put("maara", reseptiDao.count());
             
             //15 suosituinta kategoriaa
-     
-            Map<Integer, Kategoria> kategoriaMap = reseptiKategoriaDao.kategoriaCount();
+            
+            Map<String, Integer> kategoriaMap = reseptiKategoriaDao.kategoriaCount();
             List<String> kategoriat = new ArrayList<>(15);
             kategoriaMap.entrySet().stream().limit(15).forEach(e -> {
-                kategoriat.add(e.getValue().getNimi()+" - "+e.getKey());
+                kategoriat.add(e.getKey()+" - "+e.getValue());
             });
-            
+            System.out.println(kategoriat);
              map.put("kategoriat", kategoriat);
 
-            
+
             //15 suosituinta raaka-ainetta
             
-            Map<Integer, Raakaaine> raakaaineMap = reseptiRaakaaineDao.raakaAineCount();
+            Map<String, Integer> raakaaineMap = reseptiRaakaaineDao.raakaAineCount();
             List<String> raakaaineet = new ArrayList<>(15);
             raakaaineMap.entrySet().stream().limit(15).forEach(e -> {
-                raakaaineet.add(e.getValue().getNimi()+" - "+e.getKey());
+                raakaaineet.add(e.getKey()+" - "+e.getValue());
             });
             map.put("raakaaineet", raakaaineet);
             
