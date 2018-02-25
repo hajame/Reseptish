@@ -150,22 +150,30 @@ public class Main {
             //15 suosituinta kategoriaa
             
             Map<String, Integer> kategoriaMap = reseptiKategoriaDao.kategoriaCount();
-            List<String> kategoriat = new ArrayList<>(15);
-            kategoriaMap.entrySet().stream().limit(15).forEach(e -> {
-                kategoriat.add(e.getKey()+" - "+e.getValue());
+            List<String> kategoriat = new ArrayList<>();
+            kategoriaMap.entrySet().stream().forEach(e -> {
+                kategoriat.add(e.getValue()+" - "+ e.getKey());
             });
-            System.out.println(kategoriat);
-             map.put("kategoriat", kategoriat);
+            //System.out.println(kategoriat);
+            
+            Collections.sort(kategoriat, Collections.reverseOrder());
+            
+            ArrayList<String> jarjkategoriat =kategoriat.stream().limit(15).collect(Collectors.toCollection(ArrayList::new));
+            
+             map.put("kategoriat", jarjkategoriat);
 
 
             //15 suosituinta raaka-ainetta
             
             Map<String, Integer> raakaaineMap = reseptiRaakaaineDao.raakaAineCount();
-            List<String> raakaaineet = new ArrayList<>(15);
-            raakaaineMap.entrySet().stream().limit(15).forEach(e -> {
-                raakaaineet.add(e.getKey()+" - "+e.getValue());
+            List<String> raakaaineet = new ArrayList<>();
+            raakaaineMap.entrySet().stream().forEach(e -> {
+                raakaaineet.add(e.getValue()+" - "+ e.getKey());
             });
-            map.put("raakaaineet", raakaaineet);
+            
+            Collections.sort(raakaaineet, Collections.reverseOrder());
+            ArrayList<String> jarjraakaaineet =raakaaineet.stream().limit(15).collect(Collectors.toCollection(ArrayList::new));
+            map.put("raakaaineet", jarjraakaaineet);
             
 
 
