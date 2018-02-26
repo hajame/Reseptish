@@ -2,92 +2,98 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Tilastot</title>
-            <meta charset="utf-8" />         
+        <meta charset="utf-8" />         
         <style>
             body {
                 font-family: 'OpenSans', bold;
             }
-            
-            p.one {
-                background-color: MediumSeaGreen;   
+
+            .one {
+                background-color: MediumSeaGreen;  
+                padding-top: 10px;
+                padding-right: 10px;
+                padding-bottom: 10px;
+                padding-left: 10px;
             }
-            
-            
+
+
             a  {
                 color: white;
             }
-            
+
             th {
-                 border-style: solid;
+                border-style: solid;
                 border-width: medium;
                 color: MediumSeaGreen;     
                 padding: 5px;
                 font-family: 'OpenSans', bold;
             }
-    
-            </style>
-                  
-            <link   rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
+
+        </style>
+
+        <link   rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
     </head>
 
     <body>
+
+        <div class="one"><a href="/haku">Haku</a> 
+            | <a href="/uusi">Luo uusi resepti</a> 
+            | <a href="/reseptit">Kaikki reseptit</a> 
+            | <a href="/">Etusivu</a> 
+            | <a href="/tilasto">Tilasto</a><br/>
+
+        </div>
         <h1>Tilastot</h1>
-        
-        
-        <p class="one"><a href="/haku">Haku</a><br/>
-            <a href="/uusi">Luo uusi resepti</a> <br/>
-            <a href="/reseptit">Kaikki reseptit</a><br/>
-            <a href="/">Etusivu</a>
-            
-        </p> 
-        
+
+
+
         <table>
             <tr>
                 <th>
-        <p>Reseptien määrä: <span th:text="${maara}"> </span> <br/>
-        </p> 
+                    <p>Reseptien määrä: <span th:text="${maara}"> </span> <br/>
+                    </p> 
                 </th>
             </tr>
         </table>    
-       
-        
+
+
         <table>
             <tr>
                 <th>
-        <p>Suosituimmat kategoriat: (reseptimäärä - kategoria)     <br/>
-        </p> 
+                    <p>Suosituimmat kategoriat: (reseptimäärä - kategoria)     <br/>
+                    </p> 
                 </th>
             </tr>
             <tr>
                 <td>
-            <ul>
-            <li th:each="kategoria: ${kategoriat}">
-                <span th:text="${kategoria}">kategorian nimi </span>
-            </li>
-            </ul>
+                    <ul>
+                        <li th:each="kategoria: ${kategoriat}">
+                            <span th:text="${kategoria}">kategorian nimi </span>
+                        </li>
+                    </ul>
                 </td>         
             </tr>          
-        
+
         </table>
-     
+
         <table>
             <tr>
                 <th>
-        <p>Suosituimmat raaka-aineet: (reseptimäärä - raaka-aine)   <br/>        
-        </p>
+                    <p>Suosituimmat raaka-aineet: (reseptimäärä - raaka-aine)   <br/>        
+                    </p>
                 </th>
             </tr>
             <tr>
                 <td>
-                    
-            <ul>
-            <li th:each="raakaaine: ${raakaaineet}">
-                <span th:text="${raakaaine}"> raaka-aineen nimi </span> 
-            </li>
-            </ul>
+
+                    <ul>
+                        <li th:each="raakaaine: ${raakaaineet}">
+                            <span th:text="${raakaaine}"> raaka-aineen nimi </span> 
+                        </li>
+                    </ul>
                 </td>         
             </tr>
-        
+
         </table>
     </body>
 </html>

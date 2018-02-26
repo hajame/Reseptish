@@ -4,29 +4,32 @@
     <head>
         <title>Reseptish</title>
         <meta charset="utf-8" />
-        
+
         <style>
-             p.one {
+            p.one {
                 background-color: MediumSeaGreen;   
             }
-            
-            
+
+
             a  {
                 color: white;
+                font-size: large;
             }
-            
-            
+
+
         </style>
-        
+
     </head>
 
     <body>
+
+
         <h1>Reseptish</h1>
 
         <p><span th:text="${viesti}">Reseptish-tietokantaan voit tallentaa omia
-            reseptejäsi ja selata tietokannan sisältämiä reseptejä.</span></p>
+                reseptejäsi ja selata tietokannan sisältämiä reseptejä.</span></p>
 
-       <p class="one">
+        <p class="one">
             <a href="/haku">Haku</a><br/>
             <a href="/uusi">Luo uusi resepti</a><br/>
             <a href="/tilasto">Tilasto</a><br/>

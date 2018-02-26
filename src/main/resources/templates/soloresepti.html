@@ -12,33 +12,37 @@ and open the template in the editor.
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
         <style>
-            
-              p.one {
-                background-color: MediumSeaGreen;   
+
+            .one {
+                background-color: MediumSeaGreen;  
+                padding-top: 10px;
+                padding-right: 10px;
+                padding-bottom: 10px;
+                padding-left: 10px;
             }
-            
-            
+
+
             a  {
                 color: white;
             }
-            
+
 
         </style>
     </head>
 
     <body>
+
+
+        <div class="one"><a href="/haku">Haku</a> 
+            | <a href="/uusi">Luo uusi resepti</a> 
+            | <a href="/reseptit">Kaikki reseptit</a> 
+            | <a href="/">Etusivu</a> 
+            | <a href="/tilasto">Tilasto</a><br/>
+
+        </div> 
+
         <h1 th:text="${resepti.nimi}">Reseptin nimi</h1>
-        
-           <p class="one"><a href="/haku">Haku</a><br/>
-            <a href="/uusi">Luo uusi resepti</a> <br/>
-            <a href="/reseptit">Kaikki reseptit</a><br/>
-            <a href="/">Etusivu</a><br/>
-            <a href="/tilasto">Tilasto</a><br/>
-            
-        </p> 
-        
-        
-        
+
         <dl>
 
             <dt><b>Kategoria</b></dt>
