@@ -54,7 +54,8 @@ public class RaakaaineDao {
         try (Connection c = db.getConnection()) {
             //Erilainen PostgreSQL:ssä
             PreparedStatement lisaa = c.prepareStatement("INSERT INTO RaakaAine (raakaaine_nimi) VALUES (?) ON CONFLICT DO NOTHING RETURNING Raakaaine_id");
-            lisaa.setString(1, nimi);
+            //tallennetaan raaka-aineet pienellä, jotta "Suola" ja "suola" ovat sama raaka-aine
+            lisaa.setString(1, nimi.toLowerCase());
             ResultSet rs = lisaa.executeQuery();
             
             return rs.next() ? rs.getInt(1) : null;
@@ -65,7 +66,7 @@ public class RaakaaineDao {
     public Raakaaine search(String nimi) throws SQLException {
         try (Connection c = db.getConnection()) {
             PreparedStatement ps = c.prepareStatement("SELECT * FROM RaakaAine WHERE raakaaine_nimi = ?");
-            ps.setString(1, nimi);
+            ps.setString(1, nimi.toLowerCase());
             
             ResultSet rs = ps.executeQuery();
             
