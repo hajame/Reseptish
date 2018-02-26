@@ -94,9 +94,8 @@ public class ReseptiDao {
             lisaa.setString(2, resepti.getOhje());
             lisaa.setString(3, resepti.getTekija());
             lisaa.setInt(4, resepti.getValmistusaika());
-            lisaa.executeUpdate();
+            ResultSet rs = lisaa.executeQuery();
             
-            ResultSet rs = lisaa.getGeneratedKeys();
             rs.next();
             int id = rs.getInt(1);
             

@@ -57,9 +57,7 @@ public class KategoriaDao {
             //Erilainen PostgreSQL:ssä
             PreparedStatement lisaa = c.prepareStatement("INSERT INTO Kategoria (kategoria_nimi) VALUES (?) RETURNING Kategoria_id ON CONFLICT DO NOTHING");
             lisaa.setString(1, nimi);
-            lisaa.executeUpdate();
-            
-            ResultSet rs = lisaa.getGeneratedKeys();
+            ResultSet rs = lisaa.executeQuery();
             
             return rs.next() ? rs.getInt(1) : null;
             

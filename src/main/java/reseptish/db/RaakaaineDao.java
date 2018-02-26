@@ -55,9 +55,7 @@ public class RaakaaineDao {
             //Erilainen PostgreSQL:ssä
             PreparedStatement lisaa = c.prepareStatement("INSERT INTO RaakaAine (raakaaine_nimi) VALUES (?) RETURNING Raakaaine_id ON CONFLICT DO NOTHING");
             lisaa.setString(1, nimi);
-            lisaa.executeUpdate();
-            
-            ResultSet rs = lisaa.getGeneratedKeys();
+            ResultSet rs = lisaa.executeQuery();
             
             return rs.next() ? rs.getInt(1) : null;
             
