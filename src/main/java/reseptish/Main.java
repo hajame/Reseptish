@@ -177,7 +177,7 @@ public class Main {
             
 
 
-            //TODO: tilastojen hakeminen tietokannasta
+           
             return new ModelAndView(map, "tilasto");
         }, new ThymeleafTemplateEngine());
 
