@@ -89,7 +89,7 @@ public class ReseptiDao {
             //Erilainen PostgreSQL:ssä
             PreparedStatement lisaa = c.prepareStatement("INSERT INTO Resepti "
                 + "(resepti_nimi, ohje, tekija, valmistusaika) "
-                + "VALUES (?, ?, ?, ?)");
+                + "VALUES (?, ?, ?, ?) RETURNING ID");
             lisaa.setString(1, resepti.getNimi());
             lisaa.setString(2, resepti.getOhje());
             lisaa.setString(3, resepti.getTekija());

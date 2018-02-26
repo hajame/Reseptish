@@ -80,7 +80,7 @@ public class ReseptiRaakaaineDao {
     
     public Integer add(ReseptiRaakaaine reseptiRaakaaine) throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("INSERT INTO ReseptiRaakaaine (resepti_id, raakaaine_id, maara, yksikko, jarjestysluku, valmistusohje) VALUES (?,?,?,?,?,?)");
+            PreparedStatement ps = c.prepareStatement("INSERT INTO ReseptiRaakaaine (resepti_id, raakaaine_id, maara, yksikko, jarjestysluku, valmistusohje) VALUES (?,?,?,?,?,?) RETURNING ID");
             ps.setInt(1, reseptiRaakaaine.getResepti().getReseptiId());
             ps.setInt(2, reseptiRaakaaine.getRaakaaine().getRaakaaineId());
             ps.setInt(3, reseptiRaakaaine.getMaara());

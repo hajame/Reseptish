@@ -87,7 +87,7 @@ public class ReseptiKategoriaDao {
     
     public Integer add(ReseptiKategoria reseptiKategoria) throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("INSERT INTO ReseptiKategoria (resepti_id, kategoria_id) VALUES (?,?)");
+            PreparedStatement ps = c.prepareStatement("INSERT INTO ReseptiKategoria (resepti_id, kategoria_id) VALUES (?,?) RETURNING ID");
             ps.setInt(1, reseptiKategoria.getResepti().getReseptiId());
             ps.setInt(2, reseptiKategoria.getKategoria().getKategoriaId());
             
