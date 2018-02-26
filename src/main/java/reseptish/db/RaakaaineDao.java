@@ -53,7 +53,7 @@ public class RaakaaineDao {
     public Integer add(String nimi) throws SQLException {
         try (Connection c = db.getConnection()) {
             //Erilainen PostgreSQL:ssä
-            PreparedStatement lisaa = c.prepareStatement("INSERT INTO RaakaAine (raakaaine_nimi) VALUES (?) RETURNING ID ON CONFLICT DO NOTHING");
+            PreparedStatement lisaa = c.prepareStatement("INSERT INTO RaakaAine (raakaaine_nimi) VALUES (?) RETURNING Raakaaine_id ON CONFLICT DO NOTHING");
             lisaa.setString(1, nimi);
             lisaa.executeUpdate();
             

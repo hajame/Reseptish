@@ -78,9 +78,9 @@ public class ReseptiRaakaaineDao {
         }
     }
     
-    public Integer add(ReseptiRaakaaine reseptiRaakaaine) throws SQLException {
+    public void add(ReseptiRaakaaine reseptiRaakaaine) throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("INSERT INTO ReseptiRaakaaine (resepti_id, raakaaine_id, maara, yksikko, jarjestysluku, valmistusohje) VALUES (?,?,?,?,?,?) RETURNING ID");
+            PreparedStatement ps = c.prepareStatement("INSERT INTO ReseptiRaakaaine (resepti_id, raakaaine_id, maara, yksikko, jarjestysluku, valmistusohje) VALUES (?,?,?,?,?,?)");
             ps.setInt(1, reseptiRaakaaine.getResepti().getReseptiId());
             ps.setInt(2, reseptiRaakaaine.getRaakaaine().getRaakaaineId());
             ps.setInt(3, reseptiRaakaaine.getMaara());
@@ -89,10 +89,6 @@ public class ReseptiRaakaaineDao {
             ps.setString(6, reseptiRaakaaine.getValmistusohje());
             
             ps.executeUpdate();
-            
-            ResultSet rs = ps.getGeneratedKeys();
-            
-            return rs.next() ? rs.getInt(1) : null;
         }
     }
     

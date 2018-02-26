@@ -85,17 +85,13 @@ public class ReseptiKategoriaDao {
         }
     } 
     
-    public Integer add(ReseptiKategoria reseptiKategoria) throws SQLException {
+    public void add(ReseptiKategoria reseptiKategoria) throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("INSERT INTO ReseptiKategoria (resepti_id, kategoria_id) VALUES (?,?) RETURNING ID");
+            PreparedStatement ps = c.prepareStatement("INSERT INTO ReseptiKategoria (resepti_id, kategoria_id) VALUES (?,?)");
             ps.setInt(1, reseptiKategoria.getResepti().getReseptiId());
             ps.setInt(2, reseptiKategoria.getKategoria().getKategoriaId());
             
             ps.executeUpdate();
-            
-            ResultSet rs = ps.getGeneratedKeys();
-            
-            return rs.next() ? rs.getInt(1) : null;
         }
     }
     
