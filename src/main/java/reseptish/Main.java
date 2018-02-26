@@ -28,7 +28,6 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Spark;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
-import tikape.runko.database.OpiskelijaDao;
 
 public class Main {
 
