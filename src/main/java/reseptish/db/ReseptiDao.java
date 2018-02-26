@@ -69,13 +69,13 @@ public class ReseptiDao {
     
     public int count() throws SQLException {
          try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT COUNT(Resepti_id) FROM Resepti");
+            PreparedStatement ps = c.prepareStatement("SELECT COUNT(Resepti_id) AS count FROM Resepti");
             
             ResultSet rs = ps.executeQuery();
             
             
             if (rs.next()) {
-                return rs.getInt("COUNT(Resepti_id)");
+                return rs.getInt("count");
             } else {
                 return 0;
             }           

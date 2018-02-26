@@ -65,7 +65,7 @@ public class ReseptiKategoriaDao {
     //kategoriat  (montako reseptiä kategoriassa)  
      public Map<String, Integer>kategoriaCount() throws SQLException {
         try (Connection c = db.getConnection()) {
-              PreparedStatement ps = c.prepareStatement("SELECT *, COUNT(ReseptiKategoria.resepti_id) FROM ReseptiKategoria, Resepti, Kategoria WHERE Resepti.resepti_id=ReseptiKategoria.resepti_id AND ReseptiKategoria.kategoria_id=Kategoria.kategoria_id GROUP BY Kategoria.Kategoria_id ORDER BY COUNT(ReseptiKategoria.resepti_id) DESC ");
+              PreparedStatement ps = c.prepareStatement("SELECT Kategoria_nimi, COUNT(ReseptiKategoria.resepti_id) AS count FROM ReseptiKategoria, Resepti, Kategoria WHERE Resepti.resepti_id=ReseptiKategoria.resepti_id AND ReseptiKategoria.kategoria_id=Kategoria.kategoria_id GROUP BY Kategoria.Kategoria_id ORDER BY COUNT(ReseptiKategoria.resepti_id) DESC ");
      
             Map<String, Integer> tulokset = new TreeMap<>();
            
@@ -73,7 +73,7 @@ public class ReseptiKategoriaDao {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
            
-                tulokset.put(rs.getString("Kategoria_nimi"), rs.getInt("COUNT(ReseptiKategoria.resepti_id)"));
+                tulokset.put(rs.getString("Kategoria_nimi"), rs.getInt("count"));
             }
           
 //            for (Map.Entry<Integer, Kategoria> entry : tulokset.entrySet()) {

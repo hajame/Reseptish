@@ -63,14 +63,14 @@ public class ReseptiRaakaaineDao {
     
     public Map<String, Integer> raakaAineCount() throws SQLException {
         try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT *, count(ReseptiRaakaAine.resepti_id) FROM ReseptiRaakaAine, RaakaAine WHERE RaakaAine.raakaaine_id = ReseptiRaakaAine.raakaaine_id GROUP BY RaakaAine.raakaaine_id");
+            PreparedStatement ps = c.prepareStatement("SELECT Raakaaine_nimi, count(ReseptiRaakaAine.resepti_id) AS count FROM ReseptiRaakaAine, RaakaAine WHERE RaakaAine.raakaaine_id = ReseptiRaakaAine.raakaaine_id GROUP BY RaakaAine.raakaaine_id");
      
             Map<String, Integer> tulokset = new TreeMap<>();
             
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 //System.out.println(rs.getInt("count(ReseptiRaakaAine.resepti_id)"));
-                tulokset.put(rs.getString("Raakaaine_nimi"), rs.getInt("count(ReseptiRaakaAine.resepti_id)"));
+                tulokset.put(rs.getString("Raakaaine_nimi"), rs.getInt("count"));
             }
          
             //System.out.println(tulokset);
