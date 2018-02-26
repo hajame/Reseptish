@@ -55,7 +55,7 @@ public class KategoriaDao {
     public Integer add(String nimi) throws SQLException {
         try (Connection c = db.getConnection()) {
             //Erilainen PostgreSQL:ssä
-            PreparedStatement lisaa = c.prepareStatement("INSERT INTO Kategoria (kategoria_nimi) VALUES (?) RETURNING Kategoria_id ON CONFLICT DO NOTHING");
+            PreparedStatement lisaa = c.prepareStatement("INSERT INTO Kategoria (kategoria_nimi) VALUES (?) ON CONFLICT DO NOTHING RETURNING Kategoria_id");
             lisaa.setString(1, nimi);
             ResultSet rs = lisaa.executeQuery();
             
