@@ -95,7 +95,7 @@ public class ReseptiRaakaaineDao {
     public List<Resepti> findReseptiWithRaakaaaine(String raakaaine) throws SQLException {
         try (Connection c = db.getConnection()) {
             PreparedStatement ps = c.prepareStatement("SELECT * FROM ReseptiRaakaAine, Resepti, RaakaAine WHERE ReseptiRaakaAine.resepti_id = Resepti.resepti_id AND RaakaAine.raakaaine_id = ReseptiRaakaAine.raakaaine_id AND RaakaAine.raakaaine_nimi LIKE ?");
-            ps.setString(1, "%"+raakaaine+"%");
+            ps.setString(1, "%"+raakaaine.toLowerCase()+"%");
             
             List<Resepti> resepti = new ArrayList<>();
             
