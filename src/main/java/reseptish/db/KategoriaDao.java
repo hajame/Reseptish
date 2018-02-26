@@ -56,7 +56,8 @@ public class KategoriaDao {
         try (Connection c = db.getConnection()) {
             //Erilainen PostgreSQL:ssä
             PreparedStatement lisaa = c.prepareStatement("INSERT INTO Kategoria (kategoria_nimi) VALUES (?) ON CONFLICT DO NOTHING RETURNING Kategoria_id");
-            lisaa.setString(1, nimi);
+            //tallennetaan raaka-aineet pienellä, jotta "Suola" ja "suola" ovat sama raaka-aine
+            lisaa.setString(1, nimi.toLowerCase());
             ResultSet rs = lisaa.executeQuery();
             
             return rs.next() ? rs.getInt(1) : null;
