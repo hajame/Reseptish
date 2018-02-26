@@ -40,13 +40,13 @@ public class PostgresDatabase implements Database {
     private static String[] luoTaulut() {
         return new String[] {
             "CREATE TABLE IF NOT EXISTS Resepti (" +
-"	resepti_id integer PRIMARY KEY," +
+"	resepti_id serial PRIMARY KEY," +
 "	resepti_nimi varchar(50)," +
 "	ohje varchar(3000)," +
 "	tekija varchar(200)," +
 "	valmistusaika integer" +
 ");", "CREATE TABLE IF NOT EXISTS RaakaAine (" +
-"	raakaaine_id integer PRIMARY KEY," +
+"	raakaaine_id serial PRIMARY KEY," +
 "	raakaaine_nimi varchar(50) UNIQUE" +
 ");", "CREATE TABLE IF NOT EXISTS ReseptiRaakaAine (" +
 "	resepti_id integer," +
@@ -58,7 +58,7 @@ public class PostgresDatabase implements Database {
 "	FOREIGN KEY (resepti_id) REFERENCES Resepti(id)," +
 "	FOREIGN KEY (raakaaine_id) REFERENCES RaakaAine(id)" +
 ");", "CREATE TABLE IF NOT EXISTS Kategoria (" +
-"	kategoria_id integer PRIMARY KEY," +
+"	kategoria_id serial PRIMARY KEY," +
 "	kategoria_nimi varchar(50) UNIQUE" +
 ");", "CREATE TABLE IF NOT EXISTS ReseptiKategoria (" +
 "	kategoria_id integer," +

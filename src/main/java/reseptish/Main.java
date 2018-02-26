@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import reseptish.db.Database;
 import reseptish.db.KategoriaDao;
+import reseptish.db.PostgresDatabase;
 import reseptish.db.RaakaaineDao;
 import reseptish.db.ReseptiDao;
 import reseptish.db.ReseptiKategoriaDao;
@@ -37,7 +38,7 @@ public class Main {
             Spark.port(Integer.valueOf(System.getenv("PORT")));
         }
 
-        Database db = new SQLiteDatabase(new File("reseptish.db"));
+        Database db = new PostgresDatabase(System.getenv("JDBC_DATABASE_URL"));
         db.init();
 
         ReseptiRaakaaineDao reseptiRaakaaineDao = new ReseptiRaakaaineDao(db);
