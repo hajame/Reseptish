@@ -69,13 +69,13 @@ public class ReseptiDao {
     
     public int count() throws SQLException {
          try (Connection c = db.getConnection()) {
-            PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM Resepti");
+            PreparedStatement ps = c.prepareStatement("SELECT COUNT(Resepti_id) FROM Resepti");
             
             ResultSet rs = ps.executeQuery();
             
             
             if (rs.next()) {
-                return rs.getInt("COUNT(*)");
+                return rs.getInt("COUNT(Resepti_id)");
             } else {
                 return 0;
             }           
@@ -97,6 +97,7 @@ public class ReseptiDao {
             lisaa.executeUpdate();
             
             ResultSet rs = lisaa.getGeneratedKeys();
+            rs.next();
             int id = rs.getInt(1);
             
             return id;
