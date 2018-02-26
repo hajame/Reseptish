@@ -55,16 +55,16 @@ public class PostgresDatabase implements Database {
 "	yksikko varchar(20)," +
 "       jarjestysluku integer," +
 "	valmistusohje varchar(100)," +
-"	FOREIGN KEY (resepti_id) REFERENCES Resepti(id)," +
-"	FOREIGN KEY (raakaaine_id) REFERENCES RaakaAine(id)" +
+"	FOREIGN KEY (resepti_id) REFERENCES Resepti(resepti_id)," +
+"	FOREIGN KEY (raakaaine_id) REFERENCES RaakaAine(raakaaine_id)" +
 ");", "CREATE TABLE IF NOT EXISTS Kategoria (" +
 "	kategoria_id serial PRIMARY KEY," +
 "	kategoria_nimi varchar(50) UNIQUE" +
 ");", "CREATE TABLE IF NOT EXISTS ReseptiKategoria (" +
 "	kategoria_id integer," +
 "	resepti_id integer," +
-"	FOREIGN KEY (kategoria_id) REFERENCES Kategoria(id)," +
-"	FOREIGN KEY (resepti_id) REFERENCES Resepti(id)" +
+"	FOREIGN KEY (kategoria_id) REFERENCES Kategoria(kategoria_id)," +
+"	FOREIGN KEY (resepti_id) REFERENCES Resepti(resepti_id)" +
 ");"
         };
     }
