@@ -102,6 +102,17 @@ public class Main {
         Spark.post("/uusi", (req, res) -> {
             Map<String, String> params = parseBody(req);
             
+            if (params.get("ohje") == null || params.get("ohje").isEmpty()
+                    || params.get("tekija") == null || params.get("tekija").isEmpty()
+                    || params.get("nimi") == null || params.get("nimi").isEmpty()
+                    || params.get("valmistusaika") == null || params.get("valmistusaika").isEmpty()
+                    || params.get("raaka-aine1") == null || params.get("raaka-aine1").isEmpty()
+                    || params.get("maara1") == null || params.get("maara1").isEmpty()
+                    || params.get("yksikko1") == null || params.get("yksikko1").isEmpty()) {
+                res.redirect("/error");
+                return "";
+            }
+            
             Resepti resepti = new Resepti(null, params.get("nimi"), params.get("ohje"),
                     params.get("tekija"), Integer.parseInt(params.get("valmistusaika")));
             
@@ -180,6 +191,10 @@ public class Main {
             return new ModelAndView(map, "tilasto");
         }, new ThymeleafTemplateEngine());
 
+        //Virhe
+        Spark.get("/error", (req, res) -> {
+            return "Reseptin lisääminen puutteellisin tiedoin ei onnistu";
+        });
 
         /*Spark.get("/opiskelijat/:id", (req, res) -> {
             HashMap map = new HashMap<>();
