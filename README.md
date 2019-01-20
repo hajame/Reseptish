@@ -2,7 +2,9 @@
 
 Reseptish on Tietokantojen perusteet K2018 -kurssilla tehty tietokantasovellus, johon voi tallentaa reseptejä.
 
-## Ominaisuudet 
+### [Reseptish Herokussa](https://reseptish.herokuapp.com/)
+
+## Keskeiset ominaisuudet 
 - Etusivulla on linkit hakuun, reseptin lisäyssivulle, tilastoon ja reseptilistaan.
 - Hakutoiminnnolla tietokannan reseptejä voi hakea nimen tai raaka-aineen perusteella.
 - Uusille resepteille voi määrittää nimen, tekijän, valmistusajan, ja mihin kategorioihin resepti kuuluu.
